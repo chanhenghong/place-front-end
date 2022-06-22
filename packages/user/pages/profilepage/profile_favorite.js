@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import NavbarBeforeLogin from "../../components/containers/NavbarBeforeLogin";
 import {
   Grid,
   Paper,
