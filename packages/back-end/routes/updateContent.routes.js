@@ -1,0 +1,26 @@
+const controller = require("./../controllers/updateContent.controller");
+const auth = require("../utils/auth/authJWT");
+module.exports = (app) => {
+  app.use((req, res, next) => {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+  });
+  app.post("/place/product",[auth.verifyToken], controller.createContent);
+  app.get("/place/product", controller.getContent);
+  app.put("/place/product/:id", controller.updateContent);
+  app.delete("/place/product/:id", controller.deleteContent);
+  //search
+  app.get("/place/product/:title", controller.searchContent);
+
+  // approval 
+
+  app.put("/place/product/approve/:id",controller.approve);
+
+  //comment
+  app.post("/place/product/comments/:contentId", [auth.verifyToken], controller.addComment)
+  // delete comment
+  app.delete("/place/product/comments/:contentId/:commentId", [auth.verifyToken], controller.deleteComment)
+};

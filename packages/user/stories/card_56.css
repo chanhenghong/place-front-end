@@ -1,0 +1,20 @@
+.card-style {
+  height: 331px;
+  width: 250px;
+  box-shadow: gray 30px 30px 30px;
+}
+.title-style {
+  font-size: 20px;
+  color: #18a0fb;
+  margin: 12px 10px;
+}
+.description {
+  color: #23282d;
+}
+#firstIcon{
+  margin: 16.5px 9.2px 14.93px 180.6px;
+}
+#secondIcon{
+  padding: 0px;
+  margin: 0px;
+}
