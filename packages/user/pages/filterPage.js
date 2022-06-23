@@ -5,7 +5,7 @@ import Notes from "../components/presentations/FilterCard";
 import {Stack} from '@mui/material'
 import Image from "next/image";
 import {
-  places,kindofplacesList,typeofplacesList,activitiesList, pricesList
+  places, activities, kindofplaces, prices, typeofplaces
 } from "./../web-admin/_mock_/category";
 import {
   Button,
@@ -189,18 +189,18 @@ console.log(arr.join("&"))
             </Grid>
             <Grid item xs={12} lg={2.4} sm={2}>
               <Autocomplete
-                //onChange={
-                //  (event, value) => filterKindofplaces(value.kindofplace.toLowerCase().replaceAll(" ",''))
+                onChange={
+                  (event, value) => filterKindofplaces(value.kindofplace.toLowerCase().replaceAll(" ",''))
   
-                //}
+                }
                 disablePortal
                 id="combo-box-demo"
-                options={kindofplacesList}
+                options={kindofplaces}
                 lg={{ width: 600 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Kind of place"
+                    label="Kindofplace"
                     inputProps={{
                       ...params.inputProps,
                       autoComplete: "new-password",
@@ -221,12 +221,13 @@ console.log(arr.join("&"))
             </Grid>
             <Grid item xs={12} lg={2.4} sm={2}>
               <Autocomplete
-                onChange={(event, value) =>
-                  filterActivities(value.activity.toLowerCase().replaceAll(" ",''))
+                onChange={
+                  (event, value) => filterActivities(value.activity.toLowerCase().replaceAll(" ",''))
+  
                 }
                 disablePortal
                 id="combo-box-demo"
-                options={activitiesList}
+                options={activities}
                 lg={{ width: 600 }}
                 renderInput={(params) => (
                   <TextField
@@ -257,7 +258,7 @@ console.log(arr.join("&"))
                 }
                 disablePortal
                 id="combo-box-demo"
-                options={typeofplacesList}
+                options={typeofplaces}
                 lg={{ width: 600 }}
                 renderInput={(params) => (
                   <TextField
@@ -288,7 +289,7 @@ console.log(arr.join("&"))
                 }
                 disablePortal
                 id="combo-box-demo"
-                options={pricesList}
+                options={prices}
                 //sx={{ width: 350 }}
                 lg={{ width: 600, overflow: "auto" }}
                 renderInput={(params) => (

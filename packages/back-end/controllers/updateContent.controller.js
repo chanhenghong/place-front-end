@@ -1,15 +1,15 @@
 const db = require("./../models");
 const { uuidv, uuid } = require("uuidv4");
-const { text } = require("body-parser");
+
 
 const getContentByUser= async (req,res)=>
 {
   const userId= req.userId;
   
   try{ 
-    let user = await db.updateContent.find({userId:userId})
+    let response= await db.updateContent.find({userId:userId})
     //.populate("updateContent");
-    if (!user) {
+    if (!response) {
       return res.status(404).send({
         statusCode: 404,
         message: `Cannot find user with ${userId}`,
@@ -17,7 +17,7 @@ const getContentByUser= async (req,res)=>
     }
     res.status(200).send({
       statusCode:200,
-      message:user
+      message:response
     })
   }
   catch (error){
@@ -42,7 +42,7 @@ const searchContent = async (req, res) => {
     });
     return res.status(200).send({
       message: "Success",
-      data: result,
+      response: result,
     });
   } catch (error) {
     res.status(500).send({
@@ -118,7 +118,7 @@ const getContent = async (req, res) => {
         }&limit=${limit}`;
       }
       res.status(200).send({
-        data: response,
+        response: response,
         pages: pages,
         count: response.length,
         total: total,
@@ -152,7 +152,7 @@ const getContent = async (req, res) => {
       res.status(200).send({
         total: total,
         count: result.length,
-        data: result,
+        response: result,
       });
     } else if (title !== undefined) {
       const response = await db.updateContent.find({
@@ -162,7 +162,7 @@ const getContent = async (req, res) => {
       res.status(200).send({
         total: total,
         count: response.length,
-        data: response,
+       response : response,
       });
     } else if (Object.keys(filterObj).length !== 0) {
       console.log(filterObj);
@@ -180,7 +180,7 @@ const getContent = async (req, res) => {
       res.status(200).send({
         total: total,
         count: response.length,
-        data: response,
+        response: response,
       });
     } else {
       const response = await db.updateContent.find();
