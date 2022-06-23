@@ -29,10 +29,10 @@ const updateContentSchema = mongoose.Schema(
       type: Number,
       //required: true,
     },
-    latlong: [{
+    latlong: {
       type: String,
       //required: true,
-    }],
+    },
     url: [
       {
         type: String,
@@ -58,6 +58,7 @@ const updateContentSchema = mongoose.Schema(
         "kratie",
         "mondulkiri",
         "preahvihear",
+        "battambang",
         "preyveng",
         "pursat",
         "ratanakiri",
@@ -72,7 +73,7 @@ const updateContentSchema = mongoose.Schema(
         "tboungkhmum",
       ],
     },
-    kindofplaces: [{
+    kindofplaces: {
       type: String,
 
       trim: true,
@@ -93,7 +94,7 @@ const updateContentSchema = mongoose.Schema(
         "vintage",
         "outskirt",
       ],
-    }],
+    },
     typeofplaces: {
       type: String,
       trim: true,
@@ -151,7 +152,11 @@ const updateContentSchema = mongoose.Schema(
     //  type:Boolean,
     //  default:false
     //}
-    comments:
+    userId:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"users"
+    },
+    comments:[
       {
         _id:{type:String, required:true},
         userId:{
@@ -161,15 +166,11 @@ const updateContentSchema = mongoose.Schema(
         },
         text:{
           type:String,
-          //required:true
+          required:true
         },
         date:{type:Date, default:Date.now()}
       }
-    ,
-    user:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'users'
-    }
+    ]
   },
 
   { timestamps: true }

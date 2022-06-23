@@ -2,6 +2,31 @@ const db = require("./../models");
 const { uuidv, uuid } = require("uuidv4");
 const { text } = require("body-parser");
 
+const getContentByUser= async (req,res)=>
+{
+  const userId= req.userId;
+  
+  try{ 
+    let user = await db.updateContent.find({userId:userId})
+    //.populate("updateContent");
+    if (!user) {
+      return res.status(404).send({
+        statusCode: 404,
+        message: `Cannot find user with ${userId}`,
+      });
+    }
+    res.status(200).send({
+      statusCode:200,
+      message:user
+    })
+  }
+  catch (error){
+      res.status(500).send({
+        statusCode:500,
+        message:error||"Internal server error"
+      })
+  }
+}
 const searchContent = async (req, res) => {
   const title = req.params.title;
   if (title == "" || title == "undefined") {
@@ -174,6 +199,7 @@ const getContent = async (req, res) => {
 };
 
 const createContent = async (req, res) => {
+  const userId= req.userId
   const body = req.body;
   if (Object.keys(body).length == 0) {
     return res.status(400).send({
@@ -196,6 +222,7 @@ const createContent = async (req, res) => {
     activities: body.activities,
     prices: body.prices,
     liked: body.liked,
+    userId
   });
   try {
     const response = await create.save();
@@ -467,11 +494,9 @@ const removeSavedContents = async (req, res) => {
 const findSavedContent = async (req, res) => {
   const userId = req.userId;
   console.log(userId)
- 
   try {
     //const user = await db.users.findById({_id:userId})
-    let user = await db.users.findById({ _id:userId });
-    console.log('user',user)
+    let user = await db.users.findById({ _id:userId }).populate('savedContent')
     //.populate("updateContent");
     if (!user) {
       return res.status(404).send({
@@ -492,8 +517,10 @@ const findSavedContent = async (req, res) => {
   }
 };
 
+
 module.exports = {
   getContent,
+  getContentByUser,
   createContent,
   updateContent,
   deleteContent,

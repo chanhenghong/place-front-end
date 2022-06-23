@@ -75,7 +75,7 @@ const createArticleContent = async (req, res) => {
   const create = new db.articles({
     lowerContent: body.lowerContent,
     upperContent: body.upperContent,
-    name: body.name,
+   // name: body.name,
     title: body.title,
     url: body.url,
   });
@@ -140,6 +140,11 @@ module.exports = {
   updateArticleContent,
   deleteArticleContent,
 };
+
+
+
+
+
 //const { articles } = require("../models");
 //const db = require("../models");
 //
@@ -246,10 +251,10 @@ module.exports = {
 //  }
 //};
 //{
-//  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//                                Create an article content
-//   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//}
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+                                Create an article content
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 //const createArticleContent = async (req, res) => {
 //  const body = req.body;
 //  if (Object.keys(body).length == 0) {
@@ -283,9 +288,9 @@ module.exports = {
 //  }
 //};
 //{
-//  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//                                Update an article content
-//   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+                                Update an article content
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //}
 //const updateArticleContent = async (req, res) => {
 //  const id = req.params.id;
@@ -307,9 +312,9 @@ module.exports = {
 //  }
 //};
 //{
-//  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//                                Delete an article content
-//   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+                                Delete an article content
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //}
 //const deleteArticleContent = async (req, res) => {
 //  const id = req.params.id;
@@ -339,4 +344,4 @@ module.exports = {
 //  updateArticleContent,
 //  deleteArticleContent,
 //};
-//
+
