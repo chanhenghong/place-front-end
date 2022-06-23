@@ -24,6 +24,18 @@ const userSchema = mongoose.Schema(
       // somavutey@gmail.com
       //chanheng@.com
     },
+    savedContent:[
+        {
+          type:mongoose.Schema.Types.ObjectId,
+          ref:"updateContent"
+        }
+    ],
+    savedArticle:[
+      {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"articles"
+      }
+    ]
   },
   {
     timestamps: true,
