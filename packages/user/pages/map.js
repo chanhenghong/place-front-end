@@ -1,5 +1,5 @@
 import React from "react";
-import BaseMap from "./BaseMap";
+import BaseMap from "../components/containers/BaseMap";
 
 import { Container, Grid } from "@mui/material";
 import NavBarAfterLogin from '../components/containers/NavBarAfterLogin'

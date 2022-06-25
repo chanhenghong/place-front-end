@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps, token }) {
       </RecoilRoot>
   );
 }
-
+/*
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   let authorize = {};
@@ -80,5 +80,5 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   return { pageProps, token };
 };
-
+*/
 export default MyApp;
