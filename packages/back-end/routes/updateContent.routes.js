@@ -8,8 +8,11 @@ module.exports = (app) => {
     );
     next();
   });
+  //get all content 
+  app.get("/place/product/:id", controller.getContentById)
+
   app.post("/place/product",[auth.verifyToken], controller.createContent);
-  app.get("/place/product/getbyuser",[auth.verifyToken], controller.getContentByUser)
+  app.get("/place/product/token/getbyuser",[auth.verifyToken], controller.getContentByUser)
   app.get("/place/product", controller.getContent);
   app.put("/place/product/:id", controller.updateContent);
   app.delete("/place/product/:id", controller.deleteContent);

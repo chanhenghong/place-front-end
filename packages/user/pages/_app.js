@@ -28,11 +28,13 @@ function MyApp({ Component, pageProps, token }) {
       </RecoilRoot>
   );
 }
-/*
+
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   let authorize = {};
   const token = parseCookies(ctx)?.token_user;
+  const publicRoutes =
+  ctx.pathname==="/products/[productId]"
   const protectedRoutes =
     ctx.pathname === "/about_us" ||
     ctx.pathname === "/BaseMap" ||
@@ -78,5 +80,5 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   return { pageProps, token };
 };
-*/
+
 export default MyApp;

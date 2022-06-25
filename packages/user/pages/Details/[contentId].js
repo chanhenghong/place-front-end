@@ -40,6 +40,8 @@ const ContentDetail = () => {
       setHorizontalCards(horizontalCard);
     });
   }, []);
+  
+  
 
   return (
     <>

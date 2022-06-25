@@ -5,6 +5,7 @@ const { uuidv, uuid } = require("uuidv4");
 const getContentByUser= async (req,res)=>
 {
   const userId= req.userId;
+  console.log(userId)
   
   try{ 
     let response= await db.updateContent.find({userId:userId})
@@ -21,8 +22,10 @@ const getContentByUser= async (req,res)=>
     })
   }
   catch (error){
+    console.log(error)
       res.status(500).send({
         statusCode:500,
+      
         message:error||"Internal server error"
       })
   }
@@ -50,6 +53,29 @@ const searchContent = async (req, res) => {
     });
   }
 };
+
+
+const getContentById = async(req,res)=>
+{
+  const id = req.params.id
+  
+  try {
+      const response = await db.updateContent.findById(id)
+      res.status(200).send({
+        statusCode:200,
+        response:[response]
+      })
+  }
+  catch(error)
+  {
+       res.status(500).send({
+         statusCode:500,
+      
+         error:error||"Internal Server Error"
+       })
+  }
+}
+
 const getContent = async (req, res) => {
   let filterObj = {};
   const {
@@ -530,5 +556,6 @@ module.exports = {
   approve,
   savedContents,
   removeSavedContents,
-  findSavedContent
+  findSavedContent,
+  getContentById
 };
