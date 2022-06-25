@@ -19,8 +19,8 @@ const Notes = ({ notes }) => {
   const theme = useTheme();
   return (
     <div>
-      <Link href={"./../../cadt"}>
-      <Card elevation={1} sx={{ maxWidth: 271 }} >
+      {/* <Link href={"./../../cadt"} >*/}
+      <Card   elevation={1} sx={{ maxWidth: 271 }} >
         <CardActionArea>
           <div style={{ position: "relative" }}>
             <IconButton
@@ -75,7 +75,7 @@ const Notes = ({ notes }) => {
           </div>
         </CardActionArea>
       </Card>
-      </Link>
+ 
     </div>
   );
 };

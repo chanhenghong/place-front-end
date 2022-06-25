@@ -1,17 +1,23 @@
 import Autocomplete from "@mui/material/Autocomplete";
 
 import React, { useEffect, useState } from "react";
-import Notes from "../components/presentations/FilterCard";
-
+import Notes from "../../components/presentations/FilterCard";
+import { useRouter } from "next/router";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   places, activities, kindofplaces, prices, typeofplaces
-} from "./../web-admin/_mock_/category";
+} from "../../web-admin/_mock_/category";
 import {
   Button,
 
   TextField,
-
+Card,
+CardActionArea,
+CardContent,
+CardMedia,
   Grid,
+  IconButton,
+
   Box,
   Typography,
   Container,
@@ -38,6 +44,7 @@ export default function FilterPage({ contents }) {
   //                                                Variables
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   const classes = useStyles();
+  const router= useRouter()
   const [data, setData] = useState([]);
   const [filters, setFilters] = useState({
     title: "",
@@ -49,6 +56,14 @@ export default function FilterPage({ contents }) {
   });
   //array for filter 
   const arr=[]
+  
+  //handle getId
+  const handleGetId =(value)=>
+  {
+      console.log(value)
+      router.push(`/place/${value}`)
+  }
+
 
   //set the new value from autocomplete to the object
   const handleSearch = (title) => {
@@ -300,7 +315,61 @@ console.log(arr.join("&"))
           {data.map((item, index) => {
             return (
               <Grid item key={index} xs={12} md={6} lg={3}>
-                <Notes on notes={item}></Notes>
+               <Card onClick={()=>handleGetId(item._id)}  elevation={1} sx={{ maxWidth: 271 }} >
+        <CardActionArea>
+          <div style={{ position: "relative" }}>
+            <IconButton
+              style={{ position: "absolute", paddingLeft: "220px" }}
+              aria-label="add to favorites"
+            >
+              <FavoriteIcon color="secondary" />
+            </IconButton>
+          
+            <CardMedia
+              posititon="absolute"
+              component="img"
+              width="100%"
+              height="300px"
+              image={item.url[0]}
+
+
+             
+            />
+ 
+            <CardContent
+              style={{
+                width: "100%",
+                height: 237,
+                position: "absolute",
+                bottom: 1,
+                backgroundImage:
+                  "linear-gradient(359.59deg, #000000 0.31%, rgba(0, 0, 0, 0) 57.79%)",
+              }}
+            >
+             
+              <Typography
+                style={{ position: "absolute", bottom: 16 }}
+                sx={{ position: "absolute", bottom: 16 }}
+                gutterBottom
+                fontSize="18px"
+                fontWeight={700}
+                lineHeight="29px"
+                textAlign="left"
+                color="white"
+                fontFamily="Work Sans"
+               
+              >
+                {item.title}
+                
+              </Typography>
+            
+
+            </CardContent>
+          
+           
+          </div>
+        </CardActionArea>
+      </Card>
               </Grid>
             );
           })}
