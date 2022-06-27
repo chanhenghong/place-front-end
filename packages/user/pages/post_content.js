@@ -1,39 +1,26 @@
 import React from "react";
-import Autocomplete from "@mui/material/Autocomplete";
-import BaseMap from "./BaseMap";
+
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
-import { fireStore } from "../services/firebase";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import UploadFilePage from "../components/presentations/photos";
 import PopUpCategories from "../components/containers/PopUpCategories";
 import CloseIcon from "@mui/icons-material/Close";
-import {  useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import useState from "react";
+import {  useRecoilValue, useSetRecoilState } from "recoil";
 import { useForm } from "react-hook-form";
 import { contentDataState } from "../states/contentState";
-
-import {
-  kindofplaces,
-  places,
-  activities,
-  prices,
-  typeofplaces,
-} from "../web-admin/_mock_/category";
+import BaseMap from "../components/presentations/MapInPostPage/BaseMap";
 import {
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
-  Box,
   Typography,
   Container,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { onlineFiles } from "../states/imageFilesState";
-import { latState, lngState } from "../states/latlongState";
+
 const useStyles = makeStyles({
   paper: {
     marginTop: 8,
@@ -59,16 +46,7 @@ export default function LogIn({user}) {
  // const [contentData,setContentData]=useRecoilState(contentDataState)
   const [open, setOpen] = React.useState(false);
   const [openCategory, setOpenCategory] = React.useState(false);
-  //latitute and longtitute
-  const latitute = useRecoilValue(latState);
-  const longtitute = useRecoilValue(lngState);
-  // category
-  const [kindofplace, setKindofplace] = React.useState("");
-  const [typeofplace, setTypeofplace] = React.useState("");
-  const [activity, setActivity] = React.useState("");
-  const [region, setRegion] = React.useState("");
-  const [price, setPrice] = React.useState("");
-
+  
   const {
     register,
     handleSubmit,
@@ -79,46 +57,12 @@ export default function LogIn({user}) {
   const onSubmit = (content) => {
     console.log(content)
     setOpenCategory(true);
-    // let data = JSON.parse(localStorage.getItem("dataStorage"));
-    // data = { ...data, ...content };
+
     setContentData({...contentData,...content})
-    // localStorage.setItem("dataStorage", JSON.stringify(data));
+  
   };
 
-  //files
-  // const onlinefiles = useRecoilValue(onlineFiles);
-  // const handleCreateForm = (e) => {
-  //   e.preventDefault();
-  //   const { title, phoneNumber, fb_page, address, desc } = e.target.elements;
-  //console.log(title.value, phoneNumber.value, fb_page.value, address.value)
-  //console.log(activity, region, price, typeofplace, kindofplace)
-  // fireStore
-  //   .collection("contents")
-  //   .add({
-  //     activity: activity,
-  //     region: region,
-  //     price: price,
-  //     typeofplace: typeofplace,
-  //     kindofplace: kindofplace,
-  //     title: title.value,
-  //     desc: desc.value,
-  //     phoneNumber: phoneNumber.value,
-  //     fb_page: fb_page.value,
-  //     address: address.value,
-  //     latitute: latitute,
-  //     longtitute: longtitute,
-  //     url: onlinefiles,
-  //     color: "primary",
-  //   })
-  //   .then((res) => {
-  //     console.log("Success");
-  //     e.target.reset();
-  //   })
-  //   .catch((err) => {
-  //     console.error(err.message);
-  //   });
-  // };
-
+  
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   //                                      Dialog Open and Dialog Close
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -135,30 +79,6 @@ export default function LogIn({user}) {
     setOpenCategory(false);
   };
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //                                      Retrieve data
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  // React.useEffect(() => {
-  //   fireStore.collection("contents").onSnapshot((snapshot) => {
-  //     const horizontalCard = snapshot.docs.map((doc) => {
-  //       return {
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       };
-  //     });
-  //     console.log(horizontalCard);
-
-  //     setHorizontalCards(horizontalCard);
-  //   });
-  // }, []);
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   return (
     <Container component="main" maxWidth="xs">
@@ -203,161 +123,12 @@ export default function LogIn({user}) {
           noValidate
         >
           <Grid container spacing={2}>
-            {/* <Grid item xs={12}>
-              <Autocomplete
-                onChange={(event, value) => setRegion(value.region)}
-                disablePortal
-                id="combo-box-demo"
-                options={places}
-                //sx={{ width: 350 }}
-                lg={{ width: 600 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Region"
-                    inputProps={{
-                      ...params.inputProps,
-                      autoComplete: "new-password", // disable autocomplete and autofill
-                    }}
-                  />
-                )}
-                getOptionLabel={(option) => option.region}
-                renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                    {...props}
-                  >
-                    <Button>{option.region}</Button>
-                  </Box>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Autocomplete
-                onChange={(event, value) => setKindofplace(value.kindofplace)}
-                disablePortal
-                id="combo-box-demo"
-                options={kindofplaces}
-                //sx={{ width: 350 }}
-                lg={{ width: 600 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Kind of place"
-                    inputProps={{
-                      ...params.inputProps,
-                      autoComplete: "new-password", // disable autocomplete and autofill
-                    }}
-                  />
-                )}
-                getOptionLabel={(option) => option.kindofplace}
-                renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                    {...props}
-                  >
-                    <Button>{option.kindofplace}</Button>
-                  </Box>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Autocomplete
-                onChange={(event, value) => setActivity(value.activity)}
-                disablePortal
-                id="combo-box-demo"
-                options={activities}
-                //sx={{ width: 350 }}
-                lg={{ width: 600 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Activity"
-                    inputProps={{
-                      ...params.inputProps,
-                      autoComplete: "new-password", // disable autocomplete and autofill
-                    }}
-                  />
-                )}
-                getOptionLabel={(option) => option.activity}
-                renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                    {...props}
-                  >
-                    <Button>{option.activity}</Button>
-                  </Box>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Autocomplete
-                onChange={(event, value) => setTypeofplace(value.typeofplace)}
-                disablePortal
-                id="combo-box-demo"
-                options={typeofplaces}
-                //sx={{ width: 350 }}
-                lg={{ width: 600 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Type of place"
-                    inputProps={{
-                      ...params.inputProps,
-                      autoComplete: "new-password", // disable autocomplete and autofill
-                    }}
-                  />
-                )}
-                getOptionLabel={(option) => option.typeofplace}
-                renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                    {...props}
-                  >
-                    <Button>{option.typeofplace}</Button>
-                  </Box>
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Autocomplete
-                onChange={(event, value) => setPrice(value.price)}
-                disablePortal
-                id="combo-box-demo"
-                options={prices}
-                //sx={{ width: 350 }}
-                lg={{ width: 600 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Price"
-                    inputProps={{
-                      ...params.inputProps,
-                      autoComplete: "new-password", // disable autocomplete and autofill
-                    }}
-                  />
-                )}
-                getOptionLabel={(option) => option.price}
-                renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                    {...props}
-                  >
-                    <Button onClick={setPrice(price)}>{option.price}</Button>
-                  </Box>
-                )}
-              />
-            </Grid> */}
+           
 
             {/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                                                          Write Content of the Place
                             - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                         */}
+*/}
             <Grid item xs={12}>
               <Typography textAlign={"center"}>
                 {" "}
@@ -468,12 +239,11 @@ export default function LogIn({user}) {
                 </Button>
               </Typography>
 
-              {/* <Button onClick={handleClickOpenImages}><Avatar alt="images" src="images.png" /></Button>*/}
             </Grid>
             {/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                                                              Preview and Post 
                             - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                         */}
+              */}
             <Grid item container mt={1} justifyContent="space-around">
               <Grid item>
                 <Button

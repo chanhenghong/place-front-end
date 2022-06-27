@@ -13,8 +13,13 @@ const imageIcon = makeStyles({
     padding: "0",
   },
 });
+import { useRecoilState, setRecoilState,useRecoilValue, useSetRecoilState } from "recoil";
+import { contentDataState } from "../../../states/contentState";
 
 const BaseMap = ({ MapStyles, defaultCenter, zoom }) => {
+    
+  const setContentData = useSetRecoilState(contentDataState)
+  const contentData = useRecoilValue(contentDataState)
   const mapRef = React.useRef(null);
   const [map, setMap] = React.useState(null);
   const [lat, setLat] = React.useState("");
@@ -68,6 +73,8 @@ const BaseMap = ({ MapStyles, defaultCenter, zoom }) => {
       console.log("Longitude: " + lngLat.lng + "<br />Latitude: " + lngLat.lat);
       setLat(lngLat.lat);
       setlng(lngLat.lng);
+      console.log("tey",lngLat.lat)
+      setContentData({...contentData,'latlong':[lngLat.lat, lngLat.lng]})
     }
 
     marker.on("dragend", onDragEnd);
