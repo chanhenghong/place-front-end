@@ -34,7 +34,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   let authorize = {};
   const token = parseCookies(ctx)?.token_user;
   const publicRoutes =
-  ctx.pathname==="/products/[productId]"
+  ctx.pathname==="/place/[placeId]"
   const protectedRoutes =
     ctx.pathname === "/about_us" ||
     ctx.pathname === "/BaseMap" ||
@@ -50,8 +50,14 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     //ctx.pathname === "/postcontent";
   //ctx.pathname === "/ProfilePage";
   if (!token) {
+    if (publicRoutes) {
+      return <Component {...pageProps}/>
+    } 
     protectedRoutes && redirectUser(ctx, "/");
   } else {
+    if(publicRoutes){
+      <Component {...pageProps} user={pageProps?.user} />
+    }
     try {
       authorize = JSON.parse(token);
     } catch (error) {
@@ -81,4 +87,5 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   return { pageProps, token };
 };
 */
+
 export default MyApp;

@@ -11,7 +11,7 @@ import {
   Box,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import d from './../../pages/cadt'
+//import d from './../../pages/cadt'
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Router } from "next/router";

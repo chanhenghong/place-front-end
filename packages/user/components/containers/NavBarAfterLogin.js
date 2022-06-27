@@ -70,7 +70,7 @@ const PrimarySearchAppBar = () => {
   const itemlist = [
     {
       text: "Filter",
-      path: "./../../filterPage",
+      path: "./../../place",
     },
     {
       text: "Article & Video",
