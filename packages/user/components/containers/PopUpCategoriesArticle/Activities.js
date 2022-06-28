@@ -7,8 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
-import { useRecoilState } from "recoil";
-import { contentDataState } from "../../../states/contentState";
+import { TextField, Typography } from "@mui/material";
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -21,44 +20,54 @@ const MenuProps = {
   },
 };
 
-const kindArray = ["peaceful", "indoor", "modern", "history", "nature"];
+const activityArray = [
+  "Shopping",
+  "Swimming",
+  "Hiking",
+  "Camping",
+  "Sightseeing",
+];
 
-function getStyles(name, personName, theme) {
+function getStyles(name, activitiesName, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+    activitiesName.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
 }
 
-export default function Kinds() {
+export default function Activities() {
   const theme = useTheme();
-  const [kindName, setKindName] = React.useState([]);
-const [contentData,setContentData]= useRecoilState(contentDataState)
-const handleChange = (e) => {
- let kinds ={kindofplaces:e.target.value}
- setKindName(e.target.value)
+  const [activitiesName, setActivitiesName] = React.useState([]);
 
-  
-  setContentData({...contentData,...kinds})
-  console.log('contentData',contentData)
- // alert(e.target.value.toLowerCase().replaceAll(' ',''))
-};
-
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setActivitiesName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300, height: 384 }}>
-        <InputLabel id="demo-multiple-chip-label">What kind of place?</InputLabel>
+        <InputLabel id="demo-customized-select-label">
+          What activity suit this place ?
+        </InputLabel>
         <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          multiple
+          labelId="demo-customized-select-label"
+          id="demo-customized-select"
           defaultOpen={true}
-          value={kindName}
+          multiple
+          value={activitiesName}
           onChange={handleChange}
           input={
-            <OutlinedInput id="select-multiple-chip" label="What kind of place?" />
+            <OutlinedInput
+              id="select-multiple-chip"
+              label="What activity suit this place ?"
+            />
           }
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -68,14 +77,16 @@ const handleChange = (e) => {
             </Box>
           )}
           MenuProps={MenuProps}
-        > 
-          {kindArray.map((name) => (
+        >
+         
+          {console.log("Ativities:",activitiesName)}
+          {activityArray.map((activities) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, kindName, theme)}
+              key={activities}
+              value={activities}
+              style={getStyles(activities, activitiesName, theme)}
             >
-              {name[0].toUpperCase()+name.substring(1)}
+              {activities}
             </MenuItem>
           ))}
         </Select>

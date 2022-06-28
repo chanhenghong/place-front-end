@@ -5,11 +5,7 @@ import { CardActionArea } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-<<<<<<< HEAD
-import { useRouter } from "next/dist/client/router";
-=======
 import { useRouter } from "next/router";
->>>>>>> a9a739cf6a83560d4cbcc1516323c837222e0729
 const Content = [
   {
     url: "https://firebasestorage.googleapis.com/v0/b/places-99af3.appspot.com/o/places%2FSR.jpg?alt=media&token=e29342d1-c73c-4b7c-a12c-4845b57ae220",

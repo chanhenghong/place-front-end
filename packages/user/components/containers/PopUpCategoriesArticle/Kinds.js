@@ -7,8 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
-import { useRecoilState } from "recoil";
-import { contentDataState } from "../../../states/contentState";
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -21,7 +19,7 @@ const MenuProps = {
   },
 };
 
-const kindArray = ["peaceful", "indoor", "modern", "history", "nature"];
+const kindArray = ["Peaceful", "Indoor", "Modern", "History", "Nature"];
 
 function getStyles(name, personName, theme) {
   return {
@@ -35,16 +33,16 @@ function getStyles(name, personName, theme) {
 export default function Kinds() {
   const theme = useTheme();
   const [kindName, setKindName] = React.useState([]);
-const [contentData,setContentData]= useRecoilState(contentDataState)
-const handleChange = (e) => {
- let kinds ={kindofplaces:e.target.value}
- setKindName(e.target.value)
 
-  
-  setContentData({...contentData,...kinds})
-  console.log('contentData',contentData)
- // alert(e.target.value.toLowerCase().replaceAll(' ',''))
-};
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setKindName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
   return (
     <div>
@@ -68,14 +66,14 @@ const handleChange = (e) => {
             </Box>
           )}
           MenuProps={MenuProps}
-        > 
+        > {console.log("Kind Name:",kindName)}
           {kindArray.map((name) => (
             <MenuItem
               key={name}
               value={name}
               style={getStyles(name, kindName, theme)}
             >
-              {name[0].toUpperCase()+name.substring(1)}
+              {name}
             </MenuItem>
           ))}
         </Select>
