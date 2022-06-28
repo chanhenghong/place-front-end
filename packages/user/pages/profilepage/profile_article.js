@@ -24,11 +24,11 @@ import CreateIcon from "@mui/icons-material/Create";
 import Footer from "../../components/containers/Footer";
 import {
   articlesPage,
-  ariticlesVideo,
+
   articlesVideo,
 } from "../../web-admin/_mock_/articlesPage";
 import { FAVORITE } from "../../web-admin/_mock_/Favorite";
-import NavbarBeforeLogin from "../../components/containers/NavbarBeforeLogin";
+import NavbarBeforeLogin from "../../components/containers/NavBarBeforeLogin";
 
 const style = makeStyles({
   Card: {
