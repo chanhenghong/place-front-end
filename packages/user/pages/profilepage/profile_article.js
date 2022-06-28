@@ -4,9 +4,6 @@ import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import ShareIcon from '@mui/icons-material/Share';
-import EditIcon from '@mui/icons-material/Edit';
 import {
   Grid,
   Paper,
@@ -19,7 +16,6 @@ import {
   CardContent,
   Button,
   IconButton,
-  CardActions
 } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
 import EmailIcon from "@mui/icons-material/Email";
@@ -241,17 +237,7 @@ const Profile_Article = () => {
                         </span>
                       </div>
                     </div>
-               
                   </CardActionArea>
-                  <CardActions  disableSpacing>
-                  <IconButton aria-label="share">
-        <DeleteOutlineIcon/>
-        </IconButton>
-                  <IconButton aria-label="add to favorites">
-         <EditIcon/>
-        </IconButton>
-       
-      </CardActions>
                 </Card>
               </Grid>
             ))}
@@ -311,8 +297,7 @@ const Profile_Article = () => {
                       alt="green iguana"
                       image={items.url}
                     />
-                    
-                    <CardContent sx={{ minWidth: 364, minHeight: 70 }}>
+                    <CardContent sx={{ minWidth: 364, minHeight: 100 }}>
                       <Typography
                         gutterBottom
                         variant="h5"
@@ -322,22 +307,8 @@ const Profile_Article = () => {
                       >
                         {items.title}
                       </Typography>
-                      
                     </CardContent>
-                  
                   </CardActionArea>
-                  <CardActions  disableSpacing>
-                  <IconButton aria-label="share">
-     <DeleteOutlineIcon/>
-     </IconButton>
-                  <IconButton aria-label="add to favorites">
-         <EditIcon/>
-        </IconButton>
-       
-      </CardActions>
-      
-
-
                 </Card>
               </Grid>
             ))}
@@ -365,66 +336,54 @@ const Profile_Article = () => {
             justifyContent="center"
           >
             {articlesVideo.map((items) => (
-             <Grid
-             key={items.name}
-             item
-             xs={12}
-             sm={12}
-             md={6}
-             lg={4}
-             spacing={3}
-           >
-             <Card
-               className={classes.Card}
-               sx={{
-                 width: "346px",
+              <Grid
+                key={items.name}
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={4}
+                spacing={3}
+              >
+                <Card
+                  className={classes.Card}
+                  sx={{
+                    width: "346px",
+                    height: "290px",
+                    borderRadius: "20px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <ButtonBase
+                    onClick={() => router.push("/articlepage/" + `${items.id}`)}
+                  >
+                    <CardActionArea>
+                      <CardMedia
+                        style={{
+                          width: "346px",
+                          height: "215px",
 
-                 borderRadius: "20px",
-                 marginBottom: "20px",
-               }}
-             >
-               <CardActionArea
-                 onClick={() => router.push("/articlepage/" + `${items.id}`)}
-               >
-                 <CardMedia
-                   style={{
-                     height: "215px",
-
-                     borderRadius: "10px",
-                   }}
-                   component="img"
-                   alt="green iguana"
-                   image={items.url}
-                 />
-                 
-                 <CardContent sx={{ minWidth: 364, minHeight: 70 }}>
-                   <Typography
-                     gutterBottom
-                     variant="h5"
-                     fontSize="20px"
-                     textAlign="center"
-                     component="div"
-                   >
-                     {items.title}
-                   </Typography>
-                   
-                 </CardContent>
-               
-               </CardActionArea>
-               <CardActions  disableSpacing>
-               <IconButton aria-label="share">
-     <DeleteOutlineIcon/>
-     </IconButton>
-               <IconButton aria-label="add to favorites">
-      <EditIcon/>
-     </IconButton>
-    
-   </CardActions>
-   
-
-
-             </Card>
-           </Grid>
+                          borderRadius: "10px",
+                        }}
+                        component="img"
+                        alt="green iguana"
+                        image={items.url}
+                      />
+                      <CardContent sx={{ minWidth: 364, minHeight: 100 }}>
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          fontSize="20px"
+                          textAlign="center"
+                          component="div"
+                        >
+                          {items.title}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </ButtonBase>
+                </Card>
+              </Grid>
             ))}
           </Grid>
           <div style={{ textAlign: "center" }}>

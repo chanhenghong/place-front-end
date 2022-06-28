@@ -23,12 +23,12 @@ import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import CreateIcon from "@mui/icons-material/Create";
 import Footer from "../../components/containers/Footer";
-import { FAVORITE } from "../../web-admin/_mock_/Favorite";
+import { articlesPage } from "../../web-admin/_mock_/articlesPage";
 
 const style = makeStyles({
   Card: {
     "&:hover": {
-      color: "#15A2B8",
+      color: "#008058",
     },
   },
 });
@@ -45,6 +45,7 @@ const Profile_Favorite = () => {
   const classes = style();
   return (
     <>
+      <NavbarBeforeLogin />
       <Container maxWidth="lg">
         <Typography variant="h6" marginTop="50px">
           <b>Your Profile</b>
@@ -142,7 +143,7 @@ const Profile_Favorite = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center", color: "#15A2B8" }}
+                  style={{ textAlign: "center", color: "#008058" }}
                 >
                   <b>Your Creation</b>
                 </StyledTypography>
@@ -164,9 +165,6 @@ const Profile_Favorite = () => {
         </Grid>
         {/* place section */}
         <div>
-          <Typography variant="h6">
-            <b>Places</b>
-          </Typography>
           <Grid
             sx={{
               flexGrow: 1,
@@ -180,9 +178,7 @@ const Profile_Favorite = () => {
           >
             <Grid item marginLeft="100px" marginRight="100px">
               <Grid container justifyContent="center" spacing={2}>
-                {FAVORITE.sort(function (a, b) {
-                  return b.time - a.time;
-                }).map((item) => (
+                {articlesPage.map((item) => (
                   <Grid
                     key={item.name}
                     item
@@ -196,8 +192,8 @@ const Profile_Favorite = () => {
                       <Card
                         className={classes.Card}
                         sx={{
-                          width: "346px",
-                          height: "290px",
+                          width: "315px",
+                          height: "334px",
                           borderRadius: "20px",
                           marginBottom: "20px",
                         }}
@@ -210,15 +206,15 @@ const Profile_Favorite = () => {
                           <CardActionArea>
                             <CardMedia
                               style={{
-                                width: "346px",
-                                height: "215px",
-                                borderRadius: "10px",
+                                width: "315px",
+                                height: "235px",
+                                borderRadius: "10px 10px 0 0",
                               }}
                               component="img"
                               alt="green iguana"
-                              image={item.img}
+                              image={item.url}
                             />
-                            <CardContent sx={{ minWidth: 364, minHeight: 100 }}>
+                            <CardContent sx={{ minHeight: 100 }}>
                               <Typography
                                 gutterBottom
                                 variant="h5"
