@@ -36,15 +36,14 @@ export default function TypePlaces() {
   const theme = useTheme();
   const [typeName, setTypeName] = React.useState([]);
   const [contentData, setContentData]= useRecoilState(contentDataState)
-
   const handleChange = (e) => {
-    let typePlaces={typePlaces:e.target.value}
-    setTypeName((prev)=>[...prev,e.target.value]);
-    //let data = JSON.parse(localStorage.getItem("dataStorage"));
-    //data={...data,...typePlaces}
-    //localStorage.setItem('dataStorage',JSON.stringify(data))
-    setContentData({...contentData,typeofplaces:e.target.value.toLowerCase().replaceAll(' ','')})
-    //console.log(contentData)
+   let typeofplaces={typeofplaces:e.target.value}
+   setTypeName(e.target.value)
+  
+    
+    setContentData({...contentData,...typeofplaces})
+    console.log('contentData',contentData)
+   // alert(e.target.value.toLowerCase().replaceAll(' ',''))
   };
 
   return (

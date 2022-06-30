@@ -28,17 +28,19 @@ function MyApp({ Component, pageProps, token }) {
       </RecoilRoot>
   );
 }
-/*
+
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   let authorize = {};
   const token = parseCookies(ctx)?.token_user;
   const publicRoutes =
-  ctx.pathname==="/place/[placeId]"
+  ctx.pathname==="/place/[placeId]"||
+  ctx.pathname==="/place"
   const protectedRoutes =
     ctx.pathname === "/about_us" ||
     ctx.pathname === "/BaseMap" ||
     ctx.pathname === "/contact_us" ||
+    ctx.pathname==="/place"||
     ctx.pathname === "/favorite_page" ||
     ctx.pathname === "/filter_after_login" ||
     ctx.pathname === "/filter_before_login" ||
@@ -86,6 +88,6 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   return { pageProps, token };
 };
-*/
+
 
 export default MyApp;
