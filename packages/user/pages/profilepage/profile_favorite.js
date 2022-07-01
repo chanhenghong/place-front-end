@@ -143,7 +143,7 @@ const Profile_Favorite = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center", color: "#008058" }}
+                  style={{ textAlign: "center" }}
                 >
                   <b>Your Creation</b>
                 </StyledTypography>
@@ -155,7 +155,7 @@ const Profile_Favorite = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "center", color: "#008058" }}
                 >
                   <b>Favorite Lists</b>
                 </StyledTypography>

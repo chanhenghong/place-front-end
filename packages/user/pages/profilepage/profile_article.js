@@ -148,7 +148,7 @@ const Profile_Article = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "center" , color: "#008058"}}
                 >
                   <b>Your Creation</b>
                 </StyledTypography>
@@ -160,7 +160,7 @@ const Profile_Article = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center", color: "#008058" }}
+                  style={{ textAlign: "center" }}
                 >
                   <b>Favorite Lists</b>
                 </StyledTypography>

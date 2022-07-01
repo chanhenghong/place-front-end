@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps, token }) {
       </RecoilRoot>
   );
 }
-/*
+
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   let authorize = {};
@@ -47,8 +47,8 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     ctx.pathname === "/homepage_after_login" ||
     ctx.pathname === "/post_article"||
     ctx.pathname === "/post_content"
-    //ctx.pathname === "/postcontent";
-  //ctx.pathname === "/ProfilePage";
+    ctx.pathname === "/postcontent";
+  ctx.pathname === "/ProfilePage";
   if (!token) {
     if (publicRoutes) {
       return <Component {...pageProps}/>
@@ -86,6 +86,6 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   return { pageProps, token };
 };
-*/
+
 
 export default MyApp;

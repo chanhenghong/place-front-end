@@ -30,7 +30,7 @@ const updateContentSchema = mongoose.Schema(
       //required: true,
     },
     latlong: [{
-      type: Number,
+      type: Array,
       //required: true,
     }],
     url: [
