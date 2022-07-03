@@ -39,7 +39,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     ctx.pathname === "/about_us" ||
     ctx.pathname === "/BaseMap" ||
     ctx.pathname === "/contact_us" ||
-    ctx.pathname === "/favorite_page" ||
+    ctx.pathname === "/profilepage/profile_favorite" ||
     ctx.pathname === "/filter_after_login" ||
     ctx.pathname === "/filter_before_login" ||
     ctx.pathname === "/filter_page" ||
@@ -86,6 +86,5 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   return { pageProps, token };
 };
-
 
 export default MyApp;

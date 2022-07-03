@@ -24,7 +24,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import Footer from "../../components/containers/Footer";
 import {
   articlesPage,
-
   articlesVideo,
 } from "../../web-admin/_mock_/articlesPage";
 import { FAVORITE } from "../../web-admin/_mock_/Favorite";
@@ -50,7 +49,7 @@ const Profile_Article = () => {
   const classes = style();
   return (
     <>
-          <NavbarBeforeLogin />
+      <NavbarBeforeLogin />
       <Container maxWidth="lg">
         <Typography variant="h6" marginTop="50px">
           <b>Your Profile</b>

@@ -24,6 +24,7 @@ import CallIcon from "@mui/icons-material/Call";
 import CreateIcon from "@mui/icons-material/Create";
 import Footer from "../../components/containers/Footer";
 import { articlesPage } from "../../web-admin/_mock_/articlesPage";
+import { useEffect } from "react";
 
 const style = makeStyles({
   Card: {
@@ -42,6 +43,24 @@ const Img = styled("img")({
   borderRadius: 100,
 });
 const Profile_Favorite = () => {
+  const getFavorite = async () => {
+    await fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+      }/place/product/token/getbyuser`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+      },
+     
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+  useEffect(() => {
+    getFavorite();
+  }, []);
+
   const classes = style();
   return (
     <>
