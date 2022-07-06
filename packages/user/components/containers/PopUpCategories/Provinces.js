@@ -10,6 +10,19 @@ import Chip from "@mui/material/Chip";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { contentDataState } from "../../../states/contentState";
 import { useRecoilState } from "recoil";
+import { makeStyles } from "@material-ui/core";
+const useStyles = makeStyles((themes) => ({
+  SelectField: {
+    m: 1,
+    width: 300,
+    height: 384,
+    [themes.breakpoints.down('xs')]:{
+      m: 1,
+      width: 260,
+      height: 384,
+    }
+  },
+}));
 const themes = createTheme({
   palette: {
     secondary: {
@@ -71,24 +84,28 @@ function getStyles(name, provincesName, theme) {
 
 export default function Provinces() {
   const theme = useTheme();
+  const classes = useStyles();
   const [personName, setPersonName] = React.useState("");
-  const [contentData,setContentData]= useRecoilState(contentDataState)
+  const [contentData, setContentData] = useRecoilState(contentDataState);
 
   const handleChange = (e) => {
-    console.log("Kind",e.target.value)
+    console.log("Kind", e.target.value);
     let province = { province: e.target.value };
     setPersonName(e.target.value);
     //let data = JSON.parse(localStorage.getItem("dataStorage"));
     //data = { ...data, ...province };
     //localStorage.setItem("dataStorage", JSON.stringify(data));
-    setContentData({...contentData,region:e.target.value.toLowerCase().replaceAll(' ','')})
-    console.log('contentData',contentData)
-   // alert(e.target.value.toLowerCase().replaceAll(' ',''))
+    setContentData({
+      ...contentData,
+      region: e.target.value.toLowerCase().replaceAll(" ", ""),
+    });
+    console.log("contentData", contentData);
+    // alert(e.target.value.toLowerCase().replaceAll(' ',''))
   };
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300, height: 384 }}>
+      <FormControl className={classes.SelectField}>
         <ThemeProvider theme={themes} color="white">
           <InputLabel id="demo-multiple-chip-label">
             Where is this place?{" "}

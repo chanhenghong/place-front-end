@@ -10,6 +10,19 @@ import Chip from "@mui/material/Chip";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { contentDataState } from "../../../states/contentState";
 import { useRecoilState } from "recoil";
+import { makeStyles } from "@material-ui/core";
+const useStyles = makeStyles((themes) => ({
+  SelectField: {
+    m: 1,
+    width: 300,
+    height: 384,
+    [themes.breakpoints.down('xs')]:{
+      m: 1,
+      width: 260,
+      height: 384,
+    }
+  },
+}));
 const themes = createTheme({
   palette: {
     secondary: {
@@ -44,6 +57,7 @@ function getStyles(name, personName, theme) {
 }
 
 export default function Price() {
+  const classes= useStyles();
   const theme = useTheme();
   const [personName, setPersonName] = React.useState("");
   const [contentData, setContentData]= useRecoilState(contentDataState)
@@ -62,7 +76,7 @@ export default function Price() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300, height: 384 }}>
+      <FormControl className={classes.SelectField}>
         <ThemeProvider theme={themes} color="white">
           <InputLabel id="demo-multiple-chip-label">
             How is the price?{" "}

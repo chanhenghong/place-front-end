@@ -11,6 +11,19 @@ import { TextField, Typography } from "@mui/material";
 import { contentData } from "../../../web-admin/_mock_/contentData";
 import { useRecoilState } from "recoil";
 import { contentDataState } from "../../../states/contentState";
+import { makeStyles } from "@material-ui/core";
+const useStyles = makeStyles((themes) => ({
+  SelectField: {
+    m: 1,
+    width: 300,
+    height: 384,
+    [themes.breakpoints.down('xs')]:{
+      m: 1,
+      width: 260,
+      height: 384,
+    }
+  },
+}));
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -44,6 +57,7 @@ export default function Activities() {
   const theme = useTheme();
   const [activitiesName, setActivitiesName] = React.useState([]);
   const [contentData,setContentData]= useRecoilState(contentDataState)
+  const classes = useStyles();
 
   const handleChange = (e) => {
     let activities={activities:e.target.value}
@@ -57,7 +71,7 @@ export default function Activities() {
   };
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300, height: 384 }}>
+      <FormControl className={classes.SelectField}>
         <InputLabel id="demo-customized-select-label">
           What activity suit this place ?
         </InputLabel>

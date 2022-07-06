@@ -9,6 +9,19 @@ import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { useRecoilState } from "recoil";
 import { contentDataState } from "../../../states/contentState";
+import { makeStyles } from "@material-ui/core";
+const useStyles = makeStyles((themes) => ({
+  SelectField: {
+    m: 1,
+    width: 300,
+    height: 384,
+    [themes.breakpoints.down('xs')]:{
+      m: 1,
+      width: 260,
+      height: 384,
+    }
+  },
+}));
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -33,6 +46,7 @@ function getStyles(name, typeName, theme) {
 }
 
 export default function TypePlaces() {
+  const classes = useStyles();
   const theme = useTheme();
   const [typeName, setTypeName] = React.useState([]);
   const [contentData, setContentData]= useRecoilState(contentDataState)
@@ -49,7 +63,7 @@ export default function TypePlaces() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300, height: 384 }}>
+      <FormControl className={classes.SelectField}>
         <InputLabel id="demo-multiple-chip-label">What type of place is this? </InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
