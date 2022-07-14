@@ -159,7 +159,7 @@ export default function LogIn({user}) {
                 {...register("desc", { required: true })}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -183,7 +183,7 @@ export default function LogIn({user}) {
                 autoComplete="email"
                 {...register("email")}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -244,7 +244,7 @@ export default function LogIn({user}) {
                                                              Preview and Post 
                             - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
               */}
-            <Grid item container mt={1} justifyContent="space-around">
+            <Grid item container mt={1} justifyContent="space-around" sx={{paddingBottom: 5}}>
               <Grid item>
                 <Button
                   sx={{
