@@ -13,8 +13,84 @@ import {
 import NavBarLandingPage from "../components/containers/NavBarLandingPage";
 import Image from "next/image";
 import Footer from "../components/containers/Footer";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  Title1: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 18,
+    },
+  },
+  PaperText: {
+    [theme.breakpoints.down("xs")]: {
+      width: 350,
+      height: 180,
+      backgroundColor: "rgba(88, 125, 114, 0.32)",
+      borderRadius: 30,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 600,
+      height: 250,
+      backgroundColor: "rgba(88, 125, 114, 0.32)",
+      borderRadius: 30,
+    },
+    [theme.breakpoints.up("md")]: {
+      width: 900,
+      height: 399,
+      backgroundColor: "rgba(88, 125, 114, 0.32)",
+      borderRadius: 30,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: 1050,
+      height: 399,
+      backgroundColor: "rgba(88, 125, 114, 0.32)",
+      borderRadius: 30,
+    },
+  },
+  TextOnPaper: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 12,
+      marginTop: 25,
+      marginLeft: 10,
+      marginRight: 10,
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      fontSize: 18,
+      marginTop: 30,
+      marginLeft: 20,
+      marginRight: 20,
+    },
+  },
+  ContainerPic: {
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 17,
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      marginTop: 28,
+    },
+  },
+  Picture: {
+    [theme.breakpoints.down("xs")]: {
+      width: 270,
+      borderRadius: 30,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 400,
+      borderRadius: 30,
+    },
+    [theme.breakpoints.up("md")]: {
+      width: 700,
+      borderRadius: 30,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: 800,
+      borderRadius: 30,
+    },
+  },
+}));
 
 export default function AboutUsPage() {
+  const classes = useStyles();
   return (
     <div>
       <NavBarLandingPage />
@@ -26,25 +102,32 @@ export default function AboutUsPage() {
           spacing={1}
           marginTop="50px"
         >
-          <Typography variant="h4">We're here so</Typography>
-          <Typography variant="h4" sx={{ color: "#008058" }}>
+          <Typography className={classes.Title1} variant="h5">
+            We're here so
+          </Typography>
+          <Typography
+            className={classes.Title1}
+            variant="h5"
+            sx={{ color: "#008058" }}
+          >
             You can find your satisfied place
           </Typography>
           <Divider variant="middle" sx={{ width: "400px" }} />
         </Stack>
         <Stack justifyContent="center" alignItems="center">
           <Paper
+            className={classes.PaperText}
             sx={{
               width: "1050px",
               height: "399px",
-              backgroundColor: "#587D72",
+              backgroundColor: "rgba(88, 125, 114,0.32)",
               borderRadius: "30px",
-              opacity: "70%",
             }}
             textAlign="center"
           >
             <Typography
-              variant="h5"
+              className={classes.TextOnPaper}
+              variant="h6"
               textAlign="center"
               sx={{
                 marginTop: "50px",
@@ -58,11 +141,15 @@ export default function AboutUsPage() {
               activities, places based on region, kind of place, and type of
               place.
             </Typography>
-            <Container align="center" sx={{ marginTop: "50px" }}>
+            <Container
+              className={classes.ContainerPic}
+              align="center"
+              sx={{ marginTop: "50px" }}
+            >
               <img
+                className={classes.Picture}
                 src="/PicCoverOfAboutUs.png"
                 alt="Picture place team"
-                width={800}
               />
             </Container>
           </Paper>
@@ -73,17 +160,27 @@ export default function AboutUsPage() {
         justifyContent="center"
         alignItems="center"
         spacing={1}
-        marginTop="200px"
+        sx={{ marginTop: { xs: "100px", md: "100px", lg: "200px" } }}
       >
         <Stack spacing={6}>
           <Stack justifyContent="center" alignItems="center">
-            <Typography variant="h4" textAlign="center">
+            <Typography
+              className={classes.Title1}
+              variant="h5"
+              textAlign="center"
+            >
               Our Mission
             </Typography>
             <Divider variant="middle" sx={{ width: "400px" }} />
           </Stack>
-          <Stack direction="row" spacing={18}>
-            <Stack spacing={2}>
+          <Grid
+            container
+            spacing={5}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid xs={12} md={6} item>
               <Typography>
                 <li>Make people life more convenient</li>
               </Typography>
@@ -97,8 +194,8 @@ export default function AboutUsPage() {
               <Typography>
                 <li>Increase the number of tourists in Cambodia</li>
               </Typography>
-            </Stack>
-            <Stack spacing={2}>
+            </Grid>
+            <Grid xs={12} md={6} item>
               <Typography>
                 {" "}
                 <li>Advertise our wonderful places to the world</li>
@@ -111,40 +208,54 @@ export default function AboutUsPage() {
                 {" "}
                 <li>Help promote businessess</li>
               </Typography>
-            </Stack>
-          </Stack>
+            </Grid>
+          </Grid>
         </Stack>
         <Stack spacing={6}>
           <Stack justifyContent="center" alignItems="center">
-            <Typography variant="h4" textAlign="center">
+            <Typography
+              className={classes.Title1}
+              variant="h5"
+              textAlign="center"
+              marginTop="20px"
+            >
               Your Contributions
             </Typography>
             <Divider variant="middle" sx={{ width: "400px" }} />
           </Stack>
           <Stack direction="row" spacing={18}>
-            <Typography variant="h6" sx={{ margin: "0px 300px 20px 300px" }}>
-              We want to share all the wonderful places in Cambodia to everyone,
-              so that when tourists or our people ourseleves find places to go,
-              they can easily find one that they are satisfied with price, vibes
-              of that place, safety, and so on. However, our work alone is not
-              enough to cover every wonderful places, so please help us share
-              any places you visit or write about your experiences visiting
-              there here.
-            </Typography>
+            <Container
+              align="center"
+              sx={{ width: { xs: "400px", sm: "700px", md: "1000px" } }}
+            >
+              <Typography variant="h6">
+                We want to share all the wonderful places in Cambodia to
+                everyone, so that when tourists or our people ourseleves find
+                places to go, they can easily find one that they are satisfied
+                with price, vibes of that place, safety, and so on. However, our
+                work alone is not enough to cover every wonderful places, so
+                please help us share any places you visit or write about your
+                experiences visiting there here.
+              </Typography>
+            </Container>
           </Stack>
         </Stack>
         <Stack>
           <Stack justifyContent="center" alignItems="center">
-            <Typography variant="h4" textAlign="center">
+            <Typography
+              className={classes.Title1}
+              variant="h5"
+              textAlign="center"
+              marginTop="20px"
+            >
               Our Success Team
             </Typography>
             <Divider variant="middle" sx={{ width: "400px" }} />
           </Stack>
           <Stack
+            justifyContent="center"
+            alignItems="center"
             style={{
-              textAlign: "center",
-              width: "90%",
-              paddingLeft: "10%",
               paddingTop: "30px",
             }}
           >
@@ -162,11 +273,19 @@ export default function AboutUsPage() {
             </Typography>
             <Divider variant="middle" sx={{ width: "400px" }} />
           </Stack>
-          <Stack direction="row" spacing={18}>
+          <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={18}
+          >
             <Typography
               textAlign="center"
-              variant="h4"
-              sx={{ margin: "0px 300px 20px 300px", color: "#008058" }}
+              variant="h5"
+              sx={{
+                width: { xs: "350px", sm: "700px", md: "1000px" },
+                color: "#008058",
+              }}
             >
               To be the first thing that comes to people's mind when they seek
               place to go or visit

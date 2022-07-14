@@ -13,14 +13,17 @@ import GroupSocialMediaIcons from "../containers/GroupSocialMediaIcons";
 
 export default function MembersCard() {
   return (
-    <Box sx={{ flexGrow: 1, marginLeft: 5, marginRight: 5 }}>
+    <Box
+      sx={{ flexGrow: 1, marginLeft: 5, marginRight: 5 }}
+      alignItems="center"
+    >
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         {members.map((member, index) => (
-          <Grid item xs={2} sm={3} md={3} key={index}>
+          <Grid item xs={3} sm={3} md={3} key={index} justifyContent="center">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
