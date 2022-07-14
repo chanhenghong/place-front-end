@@ -100,6 +100,7 @@ const Upload = () => {
     setRawFiles(e.target.files);
     console.log(e.target.files);
     const fileArray = Array.from(e.target.files).map((file) =>
+      
       URL.createObjectURL(file)
     );
     console.log(fileArray);

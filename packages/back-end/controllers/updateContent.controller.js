@@ -77,6 +77,7 @@ const getContentById = async(req,res)=>
 }
 
 const getContent = async (req, res) => {
+  const approve = req.query.approve||false;
   let filterObj = {};
   const {
     region,
@@ -209,7 +210,7 @@ const getContent = async (req, res) => {
         response: response,
       });
     } else {
-      const response = await db.updateContent.find();
+      const response = await db.updateContent.find({approve:approve});
       res.status(200).send({
         total: total,
         count: response.length,
@@ -542,7 +543,24 @@ const findSavedContent = async (req, res) => {
     });
   }
 };
-
+const updateStatus = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const response = await db.updateContent.findByIdAndUpdate(id, {
+      approve: true,
+    });
+    res.status(200).send({
+      message: `Updated successfully with this id ${id}`,
+      statusCode: 200,
+      response,
+    });
+  } catch (error) {
+    res.status(500).send({
+      statusCode: 500,
+      message: error || "Error occurred",
+    });
+  }
+};
 
 module.exports = {
   getContent,
@@ -557,5 +575,6 @@ module.exports = {
   savedContents,
   removeSavedContents,
   findSavedContent,
-  getContentById
+  getContentById,
+  updateStatus
 };
