@@ -118,20 +118,21 @@ const Upload = () => {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      <Grid
-        container
+      <Stack
+        direction="column"
         justifyContent="center"
+        alignItems="center"
+        spacing={1}
         style={{ textAlign: "center", width: "100%" }}
-        rowSpacing={1}
       >
-        <Grid item xs={12}>
+        <Stack>
           <Typography variant="h5" color="primary" style={{ margin: "50px" }}>
             Upload Article
           </Typography>
-        </Grid>
+        </Stack>
         <form onSubmit={handleSubmit}>
           <Box sx={{ flexGrow: 1 }}>
-            <Grid item lg={12}>
+            <Stack>
               <label>
                 <img
                   style={{ width: "10%", margin: "50px", cursor: "pointer" }}
@@ -149,14 +150,11 @@ const Upload = () => {
                   onChange={previewPic}
                 />
               </label>
-            </Grid>
+            </Stack>
 
-            <Grid item lg={12}>
-              <Grid container justifyContent="flex-end">
-                <Grid item lg={1}>
-                  <img style={{ width: "90%" }} src="/title 1.png" />
-                </Grid>
-                <Grid item lg={11}>
+            <Stack sx={{ paddingBottom: 10 }}>
+              <Stack>
+                <Stack>
                   <TextField
                     style={{ textAlign: "center", marginBottom: "24px" }}
                     type="text"
@@ -166,11 +164,10 @@ const Upload = () => {
                     required
                     onChange={handleTitlePreview}
                   />
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item lg={1}></Grid>
-                <Grid item lg={11}>
+                </Stack>
+              </Stack>
+              <Stack>
+                <Stack>
                   <TextField
                     style={{ marginBottom: "24px" }}
                     type="text"
@@ -182,20 +179,25 @@ const Upload = () => {
                     required
                     onChange={handleContentPreview}
                   />
-                </Grid>
+                </Stack>
                 <br />
-                <Grid item lg={12}>
+                <Stack>
                   <Typography variant="h5">
                     Give reader some note of your article...
                   </Typography>
-                </Grid>
-              </Grid>
+                </Stack>
+              </Stack>
               <br />
-              <Grid container>
-                <Grid item lg={1}>
-                  <img style={{ width: "90%" }} src="/logoUpload.png" />
-                </Grid>
-                <Grid item lg={5.5}>
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={1}
+              >
+                <Stack>
+                  <img style={{ width: "60px" }} src="/logoUpload.png" />
+                </Stack>
+                <Stack>
                   <Typography
                     style={{
                       marginBottom: "24px",
@@ -205,8 +207,8 @@ const Upload = () => {
                   >
                     Place&apos;s name you are writing about
                   </Typography>
-                </Grid>
-                <Grid item lg={5.5}>
+                </Stack>
+                <Stack>
                   <TextField
                     style={{ marginBottom: "24px" }}
                     type="url"
@@ -215,16 +217,21 @@ const Upload = () => {
                     placeholder="Add Link "
                     required
                   />
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item lg={1}>
+                </Stack>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={1}
+              >
+                <Stack>
                   <img
                     style={{ width: "60%", paddingTop: "15px" }}
                     src="/facebook 2.png"
                   />
-                </Grid>
-                <Grid item lg={5.5}>
+                </Stack>
+                <Stack>
                   <Typography
                     style={{
                       marginBottom: "24px",
@@ -234,8 +241,8 @@ const Upload = () => {
                   >
                     Place Facebook Page Name
                   </Typography>
-                </Grid>
-                <Grid item lg={5.5}>
+                </Stack>
+                <Stack>
                   <TextField
                     style={{ marginBottom: "24px" }}
                     type="url"
@@ -244,10 +251,15 @@ const Upload = () => {
                     placeholder="Add Link "
                     required
                   />
-                </Grid>
-              </Grid>
-              <Grid item container>
-                <Grid item lg={6} sm={6} xs={12}>
+                </Stack>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={1}
+              >
+                <Stack>
                   <Button
                     variant="contained"
                     onClick={() => {
@@ -257,8 +269,8 @@ const Upload = () => {
                   >
                     Preview
                   </Button>
-                </Grid>
-                <Grid item lg={6} sm={6} xs={12}>
+                </Stack>
+                <Stack>
                   <Button
                     variant="contained"
                     onClick={() => setOpenCategory(true)}
@@ -269,16 +281,17 @@ const Upload = () => {
                     open={openCategory}
                     onClose={() => setOpenCategory(false)}
                   />
-                </Grid>
-                
-              </Grid>
-              <Button variant="contained" type="submit">
+                </Stack>
+                <Stack>
+                  <Button variant="contained" type="submit">
                     Upload
                   </Button>
-            </Grid>
+                </Stack>
+              </Stack>
+            </Stack>
           </Box>
         </form>
-      </Grid>
+      </Stack>
       <Dialog open={open} onClose={() => handleClose()}>
         <Grid container justifyContent="center">
           <Grid item xs={4}>
