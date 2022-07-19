@@ -45,7 +45,6 @@ pipelines:
           script:
             - cd packages/back-end
             - npm install
-            - npm run test
       - step:
           name: Deploy to heroku
           caches:
