@@ -13,6 +13,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import GoldTextField from "./TextField/GoldTextField";
 import { TextField } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
 {
   /* - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -
                                                     Style
@@ -28,9 +29,46 @@ const themes = createTheme({
     },
   },
 });
+const useStyles = makeStyles((theme) => ({
+  Picture: {
+    width: "45ch",
+    height: "auto",
+    borderRadius: "15px",
+    [theme.breakpoints.down("xs")]: {
+      width: "30ch",
+      height: "auto",
+      borderRadius: "15px",
+    },
+  },
+  TextField: {
+    [theme.breakpoints.down("xs")]: {
+      width: "20ch",
+      marginTop: "15px",
+    },
+  },
+  Message: {
+    width: "58ch",
+    marginTop: "40px",
+    [theme.breakpoints.down("xs")]: {
+      width: "33ch",
+      marginTop: "15px",
+    },
+  },
+  ButtonSubmit: {
+    width: "60ch",
+    backgroundColor: "#E09C26",
+    marginTop: "40px",
+    [theme.breakpoints.down("xs")]: {
+      width: "33ch",
+      backgroundColor: "#E09C26",
+      marginTop: "40px",
+    },
+  },
+}));
 
 export default function ContactUs() {
   const form = useRef();
+  const className = useStyles();
   {
     /* This function use to intergrate our form with emailjs */
   }
@@ -78,22 +116,20 @@ export default function ContactUs() {
         spacing={1}
         style={{ textAlign: "center" }}
       >
-        <Grid item sx={12} sm={12}>
+        <Grid item lg={12} xs={12}>
           <h3 style={{ color: "#0C9000" }}>Welcome!</h3>
         </Grid>
         {/* Preview the business card to our user */}
-        <Grid item sx={12} sm={12}>
-          <img
-            style={{ width: "45ch", height: "auto", borderRadius: "15px" }}
-            src="/BusinessCard.png"
-          ></img>
+        <Grid item lg={12} xs={12}>
+          <img className={className.Picture} src="/BusinessCard.png"></img>
         </Grid>
-        <Grid item sx={12} sm={12}>
+        <Grid item lg={12} sm={12}>
           <ThemeProvider theme={themes} color="white">
             {contactUs.map((item, index) => {
               return (
-                <Grid item sx={12} sm={12} key={index}>
+                <Grid item lg={12} xs={12} key={index}>
                   <GoldTextField
+                    className={className.TextField}
                     label={item.label}
                     name={item.name}
                     type={item.type}
@@ -106,11 +142,11 @@ export default function ContactUs() {
               );
             })}
           </ThemeProvider>
-        </Grid>{" "}
-        <Grid item sx={12} sm={12}>
+        </Grid>
+        <Grid item lg={12} xs={12}>
           <ThemeProvider theme={themes} color="white">
             <TextField
-              style={{ width: "60ch", marginTop: "40px" }}
+              className={className.Message}
               id="message"
               label="Message"
               name="message"
@@ -127,18 +163,14 @@ export default function ContactUs() {
         </Grid>
         {/* For this part is the buttons part with some messages to user*/}
         <Button
-          style={{
-            width: "60ch",
-            backgroundColor: "#E09C26",
-            marginTop: "40px",
-          }}
+          className={className.ButtonSubmit}
           type="submit"
           variant="contained"
           endIcon={<SendIcon />}
         >
           Send
         </Button>
-        <Grid item sx={12} sm={12}>
+        <Grid item lg={12} xs={12}>
           <h4 style={{ color: "#E09C26" }}>Thank You!</h4>
           <p style={{ color: "#E09C26" }}>For Contact Us!</p>
         </Grid>

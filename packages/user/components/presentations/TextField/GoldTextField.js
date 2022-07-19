@@ -1,4 +1,16 @@
 import { TextField } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  TextFieldStyle: {
+    width: "48ch",
+    marginTop: "15px",
+    [theme.breakpoints.down("xs")]: {
+      width: "33ch",
+      marginTop: "15px",
+    },
+  },
+}));
 const GoldTextField = ({
   key,
   id,
@@ -9,10 +21,11 @@ const GoldTextField = ({
   color,
   autoComplete,
 }) => {
+  const classes = useStyles();
   return (
     <TextField
+      className={classes.TextFieldStyle}
       key={key}
-      style={{ width: "48ch", marginTop: "15px" }}
       id={id}
       label={label}
       name={name}
