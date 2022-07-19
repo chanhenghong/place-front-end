@@ -11,7 +11,7 @@ import { idRout } from "../../states/userState";
 import PhotoLayout from "../../components/presentations/PhotoLayout";
 import Comment from "../../components/presentations/CommentNew";
 import LinearWithValueLabel from "../../components/containers/LinearProgressReview";
-import Articles from "../../components/presentations/ContentContainer/Articles"
+import Articles from "../../components/presentations/ContentContainer/Articles";
 const ArticlePage = () => {
   const laptop = useMediaQuery("(min-width:1200px)");
   const router = useRouter();
@@ -44,7 +44,7 @@ const ArticlePage = () => {
                   style={{
                     width: "100%",
                     height: "300px",
-                    margin: "auto",
+
                     objectFit: "cover",
                   }}
                   src={item.url[0]}
@@ -74,11 +74,14 @@ const ArticlePage = () => {
               </Grid>
             </Grid>
             <Stack direction="row">
-              <Container maxWidth="lg" sx={{ marginLeft: "80px", flex: 2 }}>
+              <Container
+                maxWidth="lg"
+                sx={{ marginLeft: { md: "80px" }, flex: 2 }}
+              >
                 <Typography
-                  style={{
+                  sx={{
                     margin: "20px 20px 20px 0",
-                    fontSize: "2.5em",
+                    fontSize: { xs: "1.2em", sm: "2.5em" },
                     textAlign: "center",
                   }}
                 >
@@ -108,7 +111,7 @@ const ArticlePage = () => {
                 <Typography
                   align="justify"
                   variant="body1"
-                  style={{ fontSize: "20px" }}
+                  sx={{ fontSize: { xs: "15px", sm: "20px" } }}
                 >
                   {item.upperContent}
                 </Typography>
@@ -118,11 +121,16 @@ const ArticlePage = () => {
                 <Typography
                   align="justify"
                   variant="body1"
-                  style={{ fontSize: "20px" }}
+                  sx={{ fontSize: { xs: "15px", sm: "20px" } }}
                 >
                   {item.lowerContent}
                 </Typography>
-                <Typography variant="h4" style={{ margin: "40px 0" }}>
+                <Typography
+                  sx={{
+                    margin: "40px 0",
+                    fontSize: { xs: "20px", sm: "25px" },
+                  }}
+                >
                   Detail
                 </Typography>
                 <div>

@@ -26,7 +26,13 @@ const Articles = () => {
       ></span>
       <Typography
         variant="h5"
-        style={{opacity:"0.8", color: "#000", marginTop: 50, marginBottom: 14, fontFamily:"Work sans" }}
+        style={{
+          opacity: "0.8",
+          color: "#000",
+          marginTop: 50,
+          marginBottom: 14,
+          fontFamily: "Work sans",
+        }}
       >
         <b>Articles</b>
       </Typography>
@@ -52,8 +58,8 @@ const Articles = () => {
             <SplideSlide key={index}>
               <Card
                 sx={{
-                  width: "315px",
-                  height: "334px",
+                  width: { xs: "115px", sm: "315px" },
+                  height: { xs: "155px", sm: "315px" },
                   borderRadius: "20px",
                   marginBottom: "20px",
                 }}
@@ -63,23 +69,26 @@ const Articles = () => {
                 >
                   <CardActionArea>
                     <CardMedia
-                      style={{
-                        width: "315px",
-                        height: "235px",
+                      sx={{
+                        width: { xs: "115px", sm: "315px" },
+                        height: { xs: "100px", sm: "240px" },
                         borderRadius: "10px 10px 0 0",
                       }}
                       component="img"
                       alt="green iguana"
                       image={image.url}
                     />
-                    <CardContent sx={{ height: "235px" }}>
+                    <CardContent
+                      sx={{
+                        width: { xs: "115px", sm: "315px" },
+                      }}
+                    >
                       <Typography
                         gutterBottom
-                        variant="h5"
-                        fontSize="20px"
                         fontWeight="bold"
                         textAlign="center"
                         component="div"
+                        sx={{ fontSize: { xs: "9px", sm: "15px" } }}
                       >
                         {image.title}
                       </Typography>

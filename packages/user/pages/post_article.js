@@ -257,7 +257,7 @@ const Upload = () => {
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
-                spacing={1}
+                spacing={2}
               >
                 <Stack>
                   <Button

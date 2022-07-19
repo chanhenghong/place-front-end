@@ -1,12 +1,14 @@
-{/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+{
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                                                           Import
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/}
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+}
 import * as React from "react";
 import PropTypes from "prop-types";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useRecoilValue } from "recoil";
 import Typography from "@mui/material/Typography";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import {
   commentState,
@@ -47,44 +49,43 @@ export default function LinearWithValueLabel() {
   return (
     <Container>
       <div>
-        <span style={{ width: "90%", fontWeight: "bold", fontSize: "2em" }}>
+        <Typography
+          sx={{
+            width: "90%",
+            fontWeight: "bold",
+            fontSize: { xs: "18px", sm: "25px" },
+          }}
+        >
           Reviews
-        </span>
-        <span
-          style={{
+        </Typography>
+        <Typography
+          sx={{
             width: "90%",
-            fontWeight: "bold",
-            fontSize: "2em",
-            marginLeft: "15%",
+            fontSize: { xs: "15px", sm: "22px" },
           }}
         >
-          {totalView}
-        </span>
-        <span
-          style={{
-            width: "90%",
-            fontWeight: "bold",
-            fontSize: "2em",
-            marginLeft: "2%",
-          }}
-        >
-          {" "}
-          views
-        </span>
+          {`${totalView} views`}
+        </Typography>
       </div>
-      <Grid container flexDirection="column" justifyContent="center">
-        <Grid item>
+      <Stack container flexDirection="column" justifyContent="center">
+        <Stack item>
           <Typography>Excellent</Typography>
-          <Box sx={{ width: "50%", margin: "auto", verticalAlign: "middle" }}>
+          <Box
+            sx={{
+              width: { xs: "70%", md: "60%" },
+              margin: "auto",
+              verticalAlign: "middle",
+            }}
+          >
             <LinearProgressWithLabel
               value={totalView ? (starFiveValue * 100) / totalView : 0}
             />
           </Box>
-        </Grid>
+        </Stack>
         <br />
         <Grid item>
           <Typography> Very Good</Typography>
-          <Box sx={{ width: "50%", margin: "auto" }}>
+          <Box sx={{ width: { xs: "70%", md: "60%" }, margin: "auto" }}>
             <LinearProgressWithLabel
               value={totalView ? (starFourValue * 100) / totalView : 0}
             />
@@ -93,7 +94,7 @@ export default function LinearWithValueLabel() {
         </Grid>
         <Grid item>
           <Typography> Average</Typography>
-          <Box sx={{ width: "50%", margin: "auto" }}>
+          <Box sx={{ width: { xs: "70%", md: "60%" }, margin: "auto" }}>
             <LinearProgressWithLabel
               value={totalView ? (starThreeValue * 100) / totalView : 0}
             />
@@ -102,7 +103,7 @@ export default function LinearWithValueLabel() {
         </Grid>
         <Grid item>
           <Typography> Poor</Typography>
-          <Box sx={{ width: "50%", margin: "auto" }}>
+          <Box sx={{ width: { xs: "70%", md: "60%" }, margin: "auto" }}>
             <LinearProgressWithLabel
               value={totalView ? (starTwoValue * 100) / totalView : 0}
             />
@@ -111,13 +112,13 @@ export default function LinearWithValueLabel() {
         </Grid>
         <Grid item>
           <Typography> Terrible</Typography>
-          <Box sx={{ width: "50%", margin: "auto" }}>
+          <Box sx={{ width: { xs: "70%", md: "60%" }, margin: "auto" }}>
             <LinearProgressWithLabel
               value={totalView ? (starOneValue * 100) / totalView : 0}
             />
           </Box>
         </Grid>
-      </Grid>
+      </Stack>
     </Container>
   );
 }
