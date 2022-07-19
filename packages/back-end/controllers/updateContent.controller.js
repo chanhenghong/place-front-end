@@ -304,52 +304,6 @@ const deleteContent = async (req, res) => {
     });
   }
 };
-const approve = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const response = await db.updateContent.findByIdAndUpdate(id, {
-      approve: true,
-    });
-    if (!response) {
-      return res.status(404).send({
-        message: "Error, data is not existed yet",
-        statusCode: 404,
-      });
-    }
-    res.status(200).send({
-      message: "Success",
-      statusCode: 200,
-    });
-  } catch (error) {
-    res.status(500).send({
-      statusCode: 500,
-    });
-  }
-};
-//const getApprove= async(req,res)=>
-//{
-//  try{
-//
-//    const response = db.updateContent.find({approve:false})
-//
-//  }
-//  catch{
-//
-//  }
-//}
-/*
-const getApprove= async(req,res)=>
-{
-  try{
-     
-    const response = db.updateContent.find({approve:true})
-
-  }
-  catch{
-
-  }
-}
-*/
 const addComment = async (req, res) => {
   const text = req.body.text;
   const contentId = req.params.contentId;
@@ -571,7 +525,6 @@ module.exports = {
   searchContent,
   deleteComment,
   addComment,
-  approve,
   savedContents,
   removeSavedContents,
   findSavedContent,
