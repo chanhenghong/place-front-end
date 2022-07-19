@@ -1,5 +1,6 @@
 import * as React from "react";
-
+import fetcher from "./../../utils/api/fetcher";
+import unauthFetcher from "../../utils/api/unauthFetch";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
@@ -24,7 +25,8 @@ import CallIcon from "@mui/icons-material/Call";
 import CreateIcon from "@mui/icons-material/Create";
 import Footer from "../../components/containers/Footer";
 import { articlesPage } from "../../web-admin/_mock_/articlesPage";
-import { useEffect } from "react";
+
+import useSWR from "swr";
 
 const style = makeStyles({
   Card: {
@@ -43,25 +45,16 @@ const Img = styled("img")({
   borderRadius: 100,
 });
 const Profile_Favorite = () => {
-  const getFavorite = async () => {
-    await fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
-      }/place/product/token/getbyuser`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
-      },
-     
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
-  useEffect(() => {
-    getFavorite();
-  }, []);
-
   const classes = style();
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/place/product/savecontent/get`,
+    fetcher
+  );
+  if (error) return "It has error.";
+  if (!data) return "Loading ...";
+  console.log("data===", data);
+  
+
   return (
     <>
       <NavbarBeforeLogin />
@@ -197,7 +190,7 @@ const Profile_Favorite = () => {
           >
             <Grid item marginLeft="100px" marginRight="100px">
               <Grid container justifyContent="center" spacing={2}>
-                {articlesPage.map((item) => (
+                {data.savedContents.map((item) => (
                   <Grid
                     key={item.name}
                     item

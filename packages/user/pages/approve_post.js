@@ -1,41 +1,44 @@
+import * as React from "react";
 import { Container } from "@mui/material";
 import Image from "next/image";
-import * as React from "react";
+import useSWR from "swr";
+import fetcher from "../utils/api/fetcher";
+import updateDataFunc from "../utils/api/updateDataFunc";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Button, Stack, Divider } from "@mui/material";
 import { IconButton } from "@mui/material";
+import NavbarAfterLogin from "../components/containers/NavBarAfterLogin";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-// import { provinces } from "../web-admin/_mock_/place";
-const provinces = [
-  {
-      title:"Knorng Psar",
-      contentText:"Knorng Psar Mountain is a large forested area located in Tang Bompong Village, Ta Sal Commune, Oral District, Kampong Spue Province. Knorng Psar is a three-way intersection that connects three provinces: Koh Kong, Kampong Spue, and Pursat. Knorng Psar is an area rich in dense forest, high valleys, lush pine forests, and rich with a variety of rare wildlife.",
-      isFavorite:false,
-      image:"https://avytravel.com/wp-content/uploads/2020/06/P1040924-1024x769.jpg"
-  },
-  {
-    title: "Angkor Wat",
-    contentText:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur impedit accusantium repellendus distinctio. Libero sint assumenda excepturi! Nesciunt atque ipsa quaerat id voluptas soluta molestiae, quasi odio, facilis earum culpa!",
-    isFavorite: false,
-    image:
-      "https://cdn.britannica.com/49/94449-050-ECB0E7C2/Angkor-Wat-temple-complex-Camb.jpg",
-  },
-  {
-    title: "Bayon",
-    contentText:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur impedit accusantium repellendus distinctio. Libero sint assumenda excepturi! Nesciunt atque ipsa quaerat id voluptas soluta molestiae, quasi odio, facilis earum culpa!",
-    isFavorite: false,
-    image: "https://www.tour-cambodia.com/cdn/kh-public/bayon_temple_5d2d4832249f2b000dfc6974.jpg",
-  },
-];
+import { useState } from "react";
 
 const approvePost = () => {
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/place/product`,
+    fetcher
+  );
+  if (error) return "It has error.";
+  if (!data) return "Loading ...";
+  console.log("data===", data.response);
+  const rows = data.response;
+
+  const updateApprove = (e) => {
+    updateDataFunc(
+      `${process.env.NEXT_PUBLIC_API_URL}/place/product/approve/${e}`
+    );
+  };
+
   return (
     <div>
+      <NavbarAfterLogin />
       <Container align="center">
         <Image
           src="/approve_image.jpeg"
@@ -44,70 +47,43 @@ const approvePost = () => {
           height={150}
         />
       </Container>
-      {provinces.map((province, index) => {
-        return (
-          <Paper
-            variant="outlined"
-            sx={{
-              p: 2,
-              margin: "auto",
-              maxWidth: 1000,
-              flexGrow: 1,
-              borderColor: "silver",
-              marginTop: 5,
-            }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm container justifyContent="center">
-                <Grid item sx={{ width: 400, height: 200 }}>
-                  <img src={province.image} alt={province.title} height={200} style={{borderRadius: "6px"}}/>
-                </Grid>
-
-                <Grid item xs container direction="column" spacing={2}>
-                  <Grid item >
-                    <Typography
-                      gutterBottom
-                      variant="subtitle1"
-                      component="div"
-                    >
-                      {province.title}
-                    </Typography>
-                    <Typography variant="body2" gutterBottom paddingTop="50px">
-                      {province.contentText}
-                    </Typography>
-                  </Grid>
-                  <Grid item spacing={2}>
-                    <Stack
-                      direction="row"
-                      divider={<Divider orientation="vertical" flexItem />}
-                      spacing={2}
-                    >
-                      <Button
-                        sx={{
-                          cursor: "pointer",
-                        }}
-                        variant="outlined"
-                        color="error"
-                      >
-                        DECLINE
-                      </Button>
-                      <Button
-                        sx={{
-                          cursor: "pointer",
-                        }}
-                        variant="contained"
-                        color="success"
-                      >
-                        Accept
-                      </Button>
-                    </Stack>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
-        );
-      })}
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Content title
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                User email
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Post time
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Approve
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell>{row.title}</TableCell>
+                <TableCell align="center">{row.email}</TableCell>
+                <TableCell align="center">{row.createdAt}</TableCell>
+                <TableCell align="center">
+                  <Button onClick={() => updateApprove(row._id)}>
+                    Approve
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

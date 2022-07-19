@@ -1,14 +1,12 @@
 const db = require("./../models");
 const { uuidv, uuid } = require("uuidv4");
 
+const getContentByUser = async (req, res) => {
+  const userId = req.userId;
+  console.log(userId);
 
-const getContentByUser= async (req,res)=>
-{
-  const userId= req.userId;
-  console.log(userId)
-  
-  try{ 
-    let response= await db.updateContent.find({userId:userId})
+  try {
+    let response = await db.updateContent.find({ userId: userId });
     //.populate("updateContent");
     if (!response) {
       return res.status(404).send({
@@ -17,19 +15,18 @@ const getContentByUser= async (req,res)=>
       });
     }
     res.status(200).send({
-      statusCode:200,
-      message:response
-    })
+      statusCode: 200,
+      message: response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      statusCode: 500,
+
+      message: error || "Internal server error",
+    });
   }
-  catch (error){
-    console.log(error)
-      res.status(500).send({
-        statusCode:500,
-      
-        message:error||"Internal server error"
-      })
-  }
-}
+};
 const searchContent = async (req, res) => {
   const title = req.params.title;
   if (title == "" || title == "undefined") {
@@ -54,29 +51,26 @@ const searchContent = async (req, res) => {
   }
 };
 
+const getContentById = async (req, res) => {
+  const id = req.params.id;
 
-const getContentById = async(req,res)=>
-{
-  const id = req.params.id
-  
   try {
-      const response = await db.updateContent.findById(id)
-      res.status(200).send({
-        statusCode:200,
-        response:[response]
-      })
+    const response = await db.updateContent.findById(id);
+    res.status(200).send({
+      statusCode: 200,
+      response: [response],
+    });
+  } catch (error) {
+    res.status(500).send({
+      statusCode: 500,
+
+      error: error || "Internal Server Error",
+    });
   }
-  catch(error)
-  {
-       res.status(500).send({
-         statusCode:500,
-      
-         error:error||"Internal Server Error"
-       })
-  }
-}
+};
 
 const getContent = async (req, res) => {
+  const approve = req.query.approve || false;
   let filterObj = {};
   const {
     region,
@@ -188,7 +182,7 @@ const getContent = async (req, res) => {
       res.status(200).send({
         total: total,
         count: response.length,
-       response : response,
+        response: response,
       });
     } else if (Object.keys(filterObj).length !== 0) {
       console.log(filterObj);
@@ -209,7 +203,7 @@ const getContent = async (req, res) => {
         response: response,
       });
     } else {
-      const response = await db.updateContent.find();
+      const response = await db.updateContent.find({approve:false});
       res.status(200).send({
         total: total,
         count: response.length,
@@ -225,7 +219,7 @@ const getContent = async (req, res) => {
 };
 
 const createContent = async (req, res) => {
-  const userId= req.userId
+  const userId = req.userId;
   const body = req.body;
   if (Object.keys(body).length == 0) {
     return res.status(400).send({
@@ -248,7 +242,7 @@ const createContent = async (req, res) => {
     activities: body.activities,
     prices: body.prices,
     liked: body.liked,
-    userId
+    userId,
   });
   try {
     const response = await create.save();
@@ -403,12 +397,10 @@ const deleteComment = async (req, res) => {
     }
     //owner's comment
     if (comment.userId != userId) {
-      return res
-        .status(400)
-        .send({
-          message: "You're not the owner of this comment",
-          statusCode: 400,
-        });
+      return res.status(400).send({
+        message: "You're not the owner of this comment",
+        statusCode: 400,
+      });
     }
 
     const indexOf = post.comments.map(((cmt) => cmt._id).indexOf(commentId));
@@ -433,30 +425,27 @@ const deleteComment = async (req, res) => {
 const savedContents = async (req, res) => {
   const userId = req.userId;
   const contentId = req.params.contentId;
- 
-  
+
   try {
     //check if that user is exist in our database
-    let user = await db.users.findById({ _id:userId });
-  console.log(user)
+    let user = await db.users.findById({ _id: userId });
+    console.log(user);
     if (!user) {
       return res.status(404).send({
         statusCode: 404,
         message: `Cannot save favorite content with this user ID:${userId}`,
       });
     }
-   
+
     const isExist = user.savedContent.find(
       (content) => content.toString() === contentId
     );
     if (isExist) {
-      return res
-        .status(400)
-        .send({
-          statusCode: 400,
-          message:
-            "The content that you try to add is already exist in your saved content page!",
-        });
+      return res.status(400).send({
+        statusCode: 400,
+        message:
+          "The content that you try to add is already exist in your saved content page!",
+      });
     }
     user = await db.users.findByIdAndUpdate(
       userId,
@@ -471,10 +460,10 @@ const savedContents = async (req, res) => {
       .status(200)
       .send({ statusCode: 200, message: "Saved content sucessfully!" });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res
       .status(500)
-      .send({ statusCode: 500, message: error||"Internal Server Error." });
+      .send({ statusCode: 500, message: error || "Internal Server Error." });
   }
 };
 const removeSavedContents = async (req, res) => {
@@ -483,7 +472,7 @@ const removeSavedContents = async (req, res) => {
   let user;
   try {
     //check if that user is exist in our database
-    user = await db.users.findById({ _id:userId });
+    user = await db.users.findById({ _id: userId });
     if (!user) {
       return res.status(404).send({
         statusCode: 404,
@@ -519,10 +508,12 @@ const removeSavedContents = async (req, res) => {
 };
 const findSavedContent = async (req, res) => {
   const userId = req.userId;
-  console.log(userId)
+  console.log(userId);
   try {
     //const user = await db.users.findById({_id:userId})
-    let user = await db.users.findById({ _id:userId }).populate('savedContent')
+    let user = await db.users
+      .findById({ _id: userId })
+      .populate("savedContent");
     //.populate("updateContent");
     if (!user) {
       return res.status(404).send({
@@ -542,7 +533,24 @@ const findSavedContent = async (req, res) => {
     });
   }
 };
-
+const updateStatus = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const response = await db.updateContent.findByIdAndUpdate(id, {
+      approve: true,
+    });
+    res.status(200).send({
+      message: `Updated successfully with this id ${id}`,
+      statusCode: 200,
+      response,
+    });
+  } catch (error) {
+    res.status(500).send({
+      statusCode: 500,
+      message: error || "Error occurred",
+    });
+  }
+};
 
 module.exports = {
   getContent,
@@ -557,5 +565,6 @@ module.exports = {
   savedContents,
   removeSavedContents,
   findSavedContent,
-  getContentById
+  getContentById,
+  updateStatus,
 };
