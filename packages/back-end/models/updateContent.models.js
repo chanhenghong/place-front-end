@@ -30,7 +30,7 @@ const updateContentSchema = mongoose.Schema(
       //required: true,
     },
     latlong: [{
-      type: Number,
+      type: Array,
       //required: true,
     }],
     url: [
@@ -155,6 +155,10 @@ const updateContentSchema = mongoose.Schema(
     userId:{
       type:mongoose.Schema.Types.ObjectId,
       ref:"users"
+    },
+    approve:{
+      type:Boolean,
+      default:false
     },
     comments:[
       {

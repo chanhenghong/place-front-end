@@ -1,7 +1,10 @@
 import * as React from "react";
 import Image from "next/image";
 import { styled } from "@mui/material/styles";
+import fetcher from "../../utils/api/fetcher";
 import { makeStyles } from "@mui/styles";
+import useSWR from "swr";
+
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
@@ -24,7 +27,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import Footer from "../../components/containers/Footer";
 import {
   articlesPage,
-
   articlesVideo,
 } from "../../web-admin/_mock_/articlesPage";
 import { FAVORITE } from "../../web-admin/_mock_/Favorite";
@@ -47,10 +49,18 @@ const Img = styled("img")({
   borderRadius: 100,
 });
 const Profile_Article = () => {
+
   const classes = style();
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/place/product/token/getbyuser`,
+    fetcher
+  );
+  if (error) return "It has error.";
+  if (!data) return "Loading ...";
+  console.log("data===", data);
   return (
     <>
-          <NavbarBeforeLogin />
+      <NavbarBeforeLogin />
       <Container maxWidth="lg">
         <Typography variant="h6" marginTop="50px">
           <b>Your Profile</b>
@@ -148,7 +158,7 @@ const Profile_Article = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "center" , color: "#008058"}}
                 >
                   <b>Your Creation</b>
                 </StyledTypography>
@@ -160,7 +170,7 @@ const Profile_Article = () => {
               <a>
                 <StyledTypography
                   marginTop="50px"
-                  style={{ textAlign: "center", color: "#008058" }}
+                  style={{ textAlign: "center" }}
                 >
                   <b>Favorite Lists</b>
                 </StyledTypography>
@@ -179,7 +189,7 @@ const Profile_Article = () => {
             justifyContent="space-evenly"
             direction="row"
           >
-            {FAVORITE.map((items) => (
+            {data.data.map((items) => (
               <Grid item key={items.id} sx={{ marginBottom: 3 }}>
                 <Card
                   sx={{
@@ -196,7 +206,7 @@ const Profile_Article = () => {
                       height="250"
                       component="img"
                       alt="place img"
-                      image={items.img}
+                      image={items.url[0]}
                     />
                     <div
                       style={{
@@ -233,7 +243,7 @@ const Profile_Article = () => {
                           width={20}
                         />
                         <span style={{ fontWeight: 400 }}>
-                          {items.province}
+                          {items.region}
                         </span>
                       </div>
                     </div>
@@ -250,7 +260,7 @@ const Profile_Article = () => {
         </>
 
         {/* article section */}
-        <div>
+        {/* <div>
           <Typography variant="h6">
             <b>Articles</b>
           </Typography>
@@ -318,10 +328,10 @@ const Profile_Article = () => {
               see more
             </Button>
           </div>
-        </div>
+        </div> */}
 
         {/* Videos section */}
-        <div>
+        {/* <div>
           <Typography variant="h6">
             <b>Videos</b>
           </Typography>
@@ -391,7 +401,7 @@ const Profile_Article = () => {
               see more
             </Button>
           </div>
-        </div>
+        </div> */}
       </Container>
       <Footer />
     </>

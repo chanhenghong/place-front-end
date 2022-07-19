@@ -21,7 +21,7 @@ module.exports = (app) => {
 
   // approval 
 
-  app.put("/place/product/approve/:id",controller.approve);
+  app.put("/place/product/approve/:id",controller.updateStatus);
 
   //comment
   app.post("/place/product/comments/:contentId", [auth.verifyToken], controller.addComment)
@@ -36,4 +36,6 @@ module.exports = (app) => {
   app.delete('/place/product/savecontent/:contentId', [auth.verifyToken], controller.removeSavedContents)
   //get saved content
   app.get('/place/product/savecontent/get', [auth.verifyToken], controller.findSavedContent)
+ 
+
 };

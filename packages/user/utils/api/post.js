@@ -13,7 +13,7 @@ const postData= async (url, body) => {
   try {
     if (token) {
       const authorize = JSON.parse(token);
-      console.log("Authorize",authorize)
+      // console.log("Authorize",authorize)
       const res = await fetch(url, {
         method: "post",
         headers: {
