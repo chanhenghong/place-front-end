@@ -17,14 +17,7 @@ pipelines:
               script:
                 - cd packages/back-end
                 - npm install
-          # FOR Admin
-          - step:
-              name: Testing on admin
-              caches:
-                - node
-              script:
-                - cd packages/admin
-                - npm install
+
           # FOR Client
           - step:
               name: Testing on user
@@ -65,15 +58,6 @@ pipelines:
             - node
           script:
             - cd packages/back-end
-            - npm install
-
-      # FOR Admin
-      - step:
-          name: Testing on admin_ui
-          caches:
-            - node
-          script:
-            - cd packages/admin
             - npm install
 
 
