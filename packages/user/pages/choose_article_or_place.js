@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   backgroundCard: {
+    height: "100vh",
+
+    borderRadius: "0px",
     [theme.breakpoints.down("sm")]: {
       height: "50vh",
       borderRadius: "0px",
@@ -53,11 +56,7 @@ export default function ChoosePostArticleOr() {
         <Grid lg={6} md={6} sm={12} xs={12} item>
           <Paper
             className={classes.backgroundCard}
-            sx={{
-              height: "100vh",
-              backgroundColor: "rgba(00, 128, 88,0.32)",
-              borderRadius: "0px",
-            }}
+            sx={{ backgroundColor: "rgba(00, 128, 88,0.32)" }}
           >
             <Stack direction="row" justifyContent="center" alignItems="center">
               <Item

@@ -117,12 +117,7 @@ export default function AboutUsPage() {
         <Stack justifyContent="center" alignItems="center">
           <Paper
             className={classes.PaperText}
-            sx={{
-              width: "1050px",
-              height: "399px",
-              backgroundColor: "rgba(88, 125, 114,0.32)",
-              borderRadius: "30px",
-            }}
+            
             textAlign="center"
           >
             <Typography
