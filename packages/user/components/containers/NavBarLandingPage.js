@@ -10,7 +10,6 @@ const useStyle = makeStyles({
   navbar: {
     height: "10vh",
     background: "white",
-    borderBottom: "1px solid rgb(235, 234, 233)",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -64,7 +63,7 @@ export default function NavBarLandingPage() {
   return (
     <>
       <AppBar className={classes.navbar}>
-        <Link href="/"  passHref>
+        <Link href="/" passHref>
           <Image
             src="/LogoProject.svg"
             alt="LOGO"
@@ -106,8 +105,8 @@ export default function NavBarLandingPage() {
             </li>
           </ul>
         </Box>
-        <Box sx={{marginLeft:{xs:"48vw",sm:"0px"}}}>
-        <ButtonNavbar />
+        <Box sx={{ marginLeft: { xs: "48vw", sm: "0px" } }}>
+          <ButtonNavbar />
         </Box>
       </AppBar>
     </>
