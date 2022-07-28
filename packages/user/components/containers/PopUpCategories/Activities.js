@@ -17,11 +17,11 @@ const useStyles = makeStyles((themes) => ({
     m: 1,
     width: 300,
     height: 384,
-    [themes.breakpoints.down('xs')]:{
+    [themes.breakpoints.down("xs")]: {
       m: 1,
       width: 260,
       height: 384,
-    }
+    },
   },
 }));
 
@@ -47,7 +47,7 @@ const activityArray = [
 function getStyles(name, activitiesName, theme) {
   return {
     fontWeight:
-    activitiesName.indexOf(name) === -1
+      activitiesName.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -56,18 +56,20 @@ function getStyles(name, activitiesName, theme) {
 export default function Activities() {
   const theme = useTheme();
   const [activitiesName, setActivitiesName] = React.useState([]);
-  const [contentData,setContentData]= useRecoilState(contentDataState)
+  const [contentData, setContentData] = useRecoilState(contentDataState);
   const classes = useStyles();
 
   const handleChange = (e) => {
-    let activities={activities:e.target.value}
+    let activities = { activities: e.target.value };
     setActivitiesName(e.target.value);
 
     //let data = JSON.parse(localStorage.getItem("dataStorage"));
     //data={...data,...activities}
     //localStorage.setItem('dataStorage',JSON.stringify(data))
-    setContentData({...contentData, activities:e.target.value.toLowerCase().replaceAll(' ','')})
-    console.log(contentData)
+    setContentData({
+      ...contentData,
+      activities: e.target.value.toLowerCase().replaceAll(" ", ""),
+    });
   };
   return (
     <div>
@@ -97,8 +99,7 @@ export default function Activities() {
           )}
           MenuProps={MenuProps}
         >
-         
-          {console.log("Ativities:",activitiesName)}
+          {console.log("Ativities:", activitiesName)}
           {activityArray.map((activities) => (
             <MenuItem
               key={activities}
