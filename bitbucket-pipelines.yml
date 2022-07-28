@@ -6,19 +6,67 @@
 image: node:16
 
 pipelines:
-  default:
-    - parallel:
-        - step:
-            name: Build and Test
-            caches:
-              - node
-            script:
-              - npm install
-              - npm test
-        - step:
-            name: Code linting
-            script:
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node
+  pull-requests:
+    "**":
+      - parallel:
+          # FOR SERVER
+          - step:
+              name: Testing on server
+              caches:
+                - node
+              script:
+                - cd packages/back-end
+                - npm install
+
+          # FOR Client
+          - step:
+              name: Testing on user
+              caches:
+                - node
+              script:
+                - cd packages/user
+                - npm install
+                #- npm run test
+  branches:
+    # Brand master for release production
+    master:
+      # FOR SERVER
+      - step:
+          name: Testing on server
+          caches:
+            - node
+          script:
+            - cd packages/back-end
+            - npm install
+      - step:
+          name: Deploy to heroku
+          caches:
+            - node
+          script:
+            - cd packages/back-end
+            - git init
+            - git config --global user.email "sum1@paragoniu.edu.kh"
+            - git config --global user.name "Somavutey Um"
+            - git add .
+            - git commit -am "deploy latest update"
+            - git push -f https://heroku:f301a4ca-d51f-4dcf-8f9d-634c60dc711c@git.heroku.com/place-api-hosting-test.git HEAD:master
+    development:
+      # FOR SERVER
+      - step:
+          name: Testing on server
+          caches:
+            - node
+          script:
+            - cd packages/back-end
+            - npm install
+
+
+      # FOR Client
+      - step:
+          name: Testing on user
+          caches:
+            - node
+          script:
+            - cd packages/user
+            - npm install
+

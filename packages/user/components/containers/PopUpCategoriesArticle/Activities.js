@@ -8,6 +8,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { TextField, Typography } from "@mui/material";
+import { contentData } from "../../../web-admin/_mock_/contentData";
+import { useRecoilState } from "recoil";
+import { contentDataState } from "../../../states/contentState";
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -40,15 +43,13 @@ function getStyles(name, activitiesName, theme) {
 export default function Activities() {
   const theme = useTheme();
   const [activitiesName, setActivitiesName] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setActivitiesName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+  const [contentData,setContentData]= useRecoilState(contentDataState)
+  const handleChange = (e) => {
+   let activities ={activities:e.target.value}
+   setActivitiesName(e.target.value)
+    setContentData({...contentData,...activities})
+    console.log('contentData',contentData)
+   
   };
   return (
     <div>

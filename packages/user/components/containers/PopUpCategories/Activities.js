@@ -56,20 +56,15 @@ function getStyles(name, activitiesName, theme) {
 export default function Activities() {
   const theme = useTheme();
   const [activitiesName, setActivitiesName] = React.useState([]);
-  const [contentData, setContentData] = useRecoilState(contentDataState);
-  const classes = useStyles();
-
+  const [contentData,setContentData]= useRecoilState(contentDataState)
   const handleChange = (e) => {
-    let activities = { activities: e.target.value };
-    setActivitiesName(e.target.value);
-
-    //let data = JSON.parse(localStorage.getItem("dataStorage"));
-    //data={...data,...activities}
-    //localStorage.setItem('dataStorage',JSON.stringify(data))
-    setContentData({
-      ...contentData,
-      activities: e.target.value.toLowerCase().replaceAll(" ", ""),
-    });
+   let activities ={activities:e.target.value}
+   setActivitiesName(e.target.value)
+  
+    
+    setContentData({...contentData,...activities})
+    console.log('contentData',contentData)
+   // alert(e.target.value.toLowerCase().replaceAll(' ',''))
   };
   return (
     <div>
