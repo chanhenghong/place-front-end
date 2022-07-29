@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { useRecoilState } from "recoil";
+import { contentDataState } from "../../../states/contentState";
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -33,15 +35,15 @@ function getStyles(name, typeName, theme) {
 export default function TypePlaces() {
   const theme = useTheme();
   const [typeName, setTypeName] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setTypeName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+  const [contentData, setContentData]= useRecoilState(contentDataState)
+  const handleChange = (e) => {
+   let typeofplaces={typeofplaces:e.target.value}
+   setTypeName(e.target.value)
+  
+    
+    setContentData({...contentData,...typeofplaces})
+    console.log('contentData',contentData)
+   // alert(e.target.value.toLowerCase().replaceAll(' ',''))
   };
 
   return (
@@ -52,7 +54,7 @@ export default function TypePlaces() {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-		  defaultOpen={true}
+		      defaultOpen={true}
           value={typeName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="What type of place is this?" />}
@@ -64,7 +66,7 @@ export default function TypePlaces() {
             </Box>
           )}
           MenuProps={MenuProps}
-        > {console.log("Type:", typeName)}
+        > 
           {typePlaceArray.map((name) => (
             <MenuItem
               key={name}

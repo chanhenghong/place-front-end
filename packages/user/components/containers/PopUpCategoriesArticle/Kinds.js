@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { useRecoilState } from "recoil";
+import { contentDataState } from "../../../states/contentState";
 
 const ITEM_HEIGHT = 74;
 const ITEM_PADDING_TOP = 8;
@@ -19,7 +21,7 @@ const MenuProps = {
   },
 };
 
-const kindArray = ["Peaceful", "Indoor", "Modern", "History", "Nature"];
+const kindArray = ["peaceful", "indoor", "modern", "history", "nature"];
 
 function getStyles(name, personName, theme) {
   return {
@@ -33,19 +35,18 @@ function getStyles(name, personName, theme) {
 export default function Kinds() {
   const theme = useTheme();
   const [kindName, setKindName] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setKindName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+  const [contentData, setContentData] = useRecoilState(contentDataState)
+  const handleChange = (e) => {
+    let kinds = { kindofplaces: e.target.value }
+    setKindName(e.target.value)
+    console.log("kind name", kindName)
+    setContentData({ ...contentData, ...kinds })
+    console.log('contentData', contentData)
+   
   };
 
   return (
-    <div>
+ 
       <FormControl sx={{ m: 1, width: 300, height: 384 }}>
         <InputLabel id="demo-multiple-chip-label">What kind of place?</InputLabel>
         <Select
@@ -60,24 +61,24 @@ export default function Kinds() {
           }
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
+              {selected.map((value,index) => (
+                <Chip key={index} label={value} />
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
-        > {console.log("Kind Name:",kindName)}
-          {kindArray.map((name) => (
+        >
+          {kindArray.map((name, index) => (
             <MenuItem
-              key={name}
+              key={index}
               value={name}
               style={getStyles(name, kindName, theme)}
             >
-              {name}
+              {name[0].toUpperCase() + name.substring(1)}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </div>
+
   );
 }

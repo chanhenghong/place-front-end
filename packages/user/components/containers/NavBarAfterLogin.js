@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
+import filter from './../../pages/place'
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -241,7 +242,8 @@ const PrimarySearchAppBar = () => {
                 // onMouseEnter={() => setDropdown(true)}
                 // onMouseLeave={() => setDropdown(false)}
               >
-                <Link href="./../../filterPage">Filter</Link>
+                
+                <Link href="./../../place">Filter</Link>
                 {/* {dropdown && <ActivityDropdown />} */}
               </li>
 

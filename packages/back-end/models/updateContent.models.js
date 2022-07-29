@@ -29,10 +29,11 @@ const updateContentSchema = mongoose.Schema(
       type: Number,
       //required: true,
     },
-    latlong: [{
+    latlong: {
       type: Array,
       //required: true,
-    }],
+    },
+  
     url: [
       {
         type: String,
@@ -148,10 +149,10 @@ const updateContentSchema = mongoose.Schema(
       enum: ["red", "blue"],
       default: "blue",
     },
-    //approve:{
-    //  type:Boolean,
-    //  default:false
-    //}
+    approve:{
+      type:Boolean,
+      default:false
+     },
     userId:{
       type:mongoose.Schema.Types.ObjectId,
       ref:"users"
