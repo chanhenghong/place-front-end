@@ -9,6 +9,7 @@ import {
   CardMedia,
   CardActionArea,
   Box,
+  ButtonBase,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 //import d from './../../pages/cadt'
@@ -20,62 +21,65 @@ const Notes = ({ notes }) => {
   return (
     <div>
       {/* <Link href={"./../../cadt"} >*/}
-      <Card   elevation={1} sx={{ maxWidth: 271 }} >
+      <Card
+        elevation={1}
+        sx={{
+          width: { xs: 150, sm: 251 },
+          height: { xs: 150, sm: 251 },
+          borderRadius: 4,
+        }}
+      >
         <CardActionArea>
           <div style={{ position: "relative" }}>
-            <IconButton
-              style={{ position: "absolute", paddingLeft: "220px" }}
-              aria-label="add to favorites"
+            <Box
+              sx={{
+                position: "absolute",
+                paddingLeft: { xs: "110px", sm: "210px" },
+              }}
             >
-              <FavoriteIcon color="secondary" />
-            </IconButton>
-          
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon color="secondary" />
+              </IconButton>
+            </Box>
+
             <CardMedia
               posititon="absolute"
               component="img"
               width="100%"
-              height="300px"
               image={notes.url[0]}
-
-
-             
+              sx={{ height: { xs: 150, sm: 251 } }}
             />
- 
+
             <CardContent
               style={{
                 width: "100%",
-                height: 237,
+                height: { xs: 150, sm: 251 },
                 position: "absolute",
                 bottom: 1,
                 backgroundImage:
                   "linear-gradient(359.59deg, #000000 0.31%, rgba(0, 0, 0, 0) 57.79%)",
               }}
             >
-             
               <Typography
                 style={{ position: "absolute", bottom: 16 }}
-                sx={{ position: "absolute", bottom: 16 }}
+                sx={{
+                  position: "absolute",
+                  bottom: 16,
+                  fontSize: { xs: 12, sm: 18 },
+                }}
                 gutterBottom
-                fontSize="18px"
                 fontWeight={700}
                 lineHeight="29px"
                 textAlign="left"
                 color="white"
                 fontFamily="Work Sans"
-               
               >
                 {notes.title}
-                
               </Typography>
-            
-
             </CardContent>
-          
-           
           </div>
         </CardActionArea>
       </Card>
- 
     </div>
   );
 };
