@@ -115,8 +115,44 @@ export default function FilterPage({ contents }) {
               direction="row"
               justifyContent="center"
               alignItems="center"
+              sx={{
+                paddingLeft: { xs: "10px", sm: "30px", lg: "30px" },
+                paddingRight: { xs: "10px", sm: "30px", lg: "30px" },
+              }}
             >
-              <Grid item xs={12} lg={12}>
+              <Grid item xs={2.5} lg={1} sm={1.5}>
+                <Autocomplete
+                  onChange={(event, value) =>
+                    filterPrices(value.price.toLowerCase().replaceAll(" ", ""))
+                  }
+                  disablePortal
+                  id="combo-box-demo"
+                  options={prices}
+                  //sx={{ width: 350 }}
+                  lg={{ width: 600, overflow: "auto" }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="$"
+                      inputProps={{
+                        ...params.inputProps,
+                        autoComplete: "new-password", // disable autocomplete and autofill
+                      }}
+                      sx={{
+                        width: "100%",
+                        [`& fieldset`]: {
+                          borderRadius: 4,
+                          borderColor: "rgb(170, 172, 171, 0.6)",
+                          boxShadow:
+                            "0px 0.5526161193847656px 2.2104644775390625px 0px rgba(0, 0, 0, 0.25)",
+                        },
+                      }}
+                    />
+                  )}
+                  getOptionLabel={(option) => option.price}
+                />
+              </Grid>
+              <Grid item xs={9.5} lg={11} sm={10.5}>
                 <TextField
                   autoComplete="off"
                   label="search place"
@@ -133,7 +169,7 @@ export default function FilterPage({ contents }) {
                   }}
                 ></TextField>
               </Grid>
-              <Grid item xs={6} lg={2.4} sm={4}>
+              <Grid item xs={6} lg={3} sm={6}>
                 <Autocomplete
                   onChange={(event, value) =>
                     filterRegion(value.region.toLowerCase().replaceAll(" ", ""))
@@ -173,7 +209,7 @@ export default function FilterPage({ contents }) {
                   )}
                 />
               </Grid>
-              <Grid item xs={6} lg={2.4} sm={4}>
+              <Grid item xs={6} lg={3} sm={6}>
                 <Autocomplete
                   onChange={(event, value) =>
                     filterKindofplaces(
@@ -215,7 +251,7 @@ export default function FilterPage({ contents }) {
                   )}
                 />
               </Grid>
-              <Grid item xs={6} lg={2.4} sm={4}>
+              <Grid item xs={6} lg={3} sm={6}>
                 <Autocomplete
                   onChange={(event, value) =>
                     filterTypeofplaces(
@@ -257,39 +293,8 @@ export default function FilterPage({ contents }) {
                   )}
                 />
               </Grid>
-              <Grid item xs={6} lg={2.4} sm={6}>
-                <Autocomplete
-                  onChange={(event, value) =>
-                    filterPrices(value.price.toLowerCase().replaceAll(" ", ""))
-                  }
-                  disablePortal
-                  id="combo-box-demo"
-                  options={prices}
-                  //sx={{ width: 350 }}
-                  lg={{ width: 600, overflow: "auto" }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Price"
-                      inputProps={{
-                        ...params.inputProps,
-                        autoComplete: "new-password", // disable autocomplete and autofill
-                      }}
-                      sx={{
-                        width: "100%",
-                        [`& fieldset`]: {
-                          borderRadius: 4,
-                          borderColor: "rgb(170, 172, 171, 0.6)",
-                          boxShadow:
-                            "0px 0.5526161193847656px 2.2104644775390625px 0px rgba(0, 0, 0, 0.25)",
-                        },
-                      }}
-                    />
-                  )}
-                  getOptionLabel={(option) => option.price}
-                />
-              </Grid>
-              <Grid item xs={12} lg={2.4} sm={6}>
+
+              <Grid item xs={6} lg={3} sm={6}>
                 <Autocomplete
                   onChange={(event, value) =>
                     filterActivities(
@@ -334,10 +339,10 @@ export default function FilterPage({ contents }) {
             </Grid>
           </form>
         </div>
-        <Container sx={{ paddingTop: 3 }}>
+        <Container sx={{ paddingTop: 4 }}>
           <Grid
             container
-            spacing={2}
+            spacing={3.5}
             direction="row"
             justifyContent="center"
             alignItems="center"
@@ -352,7 +357,7 @@ export default function FilterPage({ contents }) {
                   key={index}
                   xs={6}
                   sm={6}
-                  md={6}
+                  md={4}
                   lg={3}
                 >
                   <Notes on notes={item}></Notes>
