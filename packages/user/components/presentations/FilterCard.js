@@ -14,7 +14,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 //import d from './../../pages/cadt'
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Router } from "next/router";
 const Notes = ({ notes }) => {
   const theme = useTheme();
@@ -24,9 +24,11 @@ const Notes = ({ notes }) => {
       <Card
         elevation={1}
         sx={{
-          width: { xs: 150, sm: 251 },
+          width: { xs: 170, sm: 251 },
           height: { xs: 150, sm: 251 },
           borderRadius: 4,
+          marginLeft: 1,
+          marginRight: 1,
         }}
       >
         <CardActionArea>
@@ -34,11 +36,11 @@ const Notes = ({ notes }) => {
             <Box
               sx={{
                 position: "absolute",
-                paddingLeft: { xs: "110px", sm: "210px" },
+                paddingLeft: { xs: "125px", sm: "210px" },
               }}
             >
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon color="secondary" />
+                <FavoriteBorderIcon sx={{ color: "white" }} />
               </IconButton>
             </Box>
 
