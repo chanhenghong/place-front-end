@@ -38,19 +38,20 @@ const Articles = () => {
       </Typography>
       <Splide
         options={{
-          perPage: 3,
+          perPage: 5,
           breakpoints: {
-            1280: {
+            1430: {
+              perPage: 4,
+            },
+            1090: {
+              perPage: 3,
+            },
+            780: {
               perPage: 2,
             },
-            900: {
-              perPage: 1,
-            },
           },
-
           pagination: false,
           drag: "free",
-          padding: { right: 100 },
         }}
       >
         {articles.map((image, index) => {
@@ -58,10 +59,11 @@ const Articles = () => {
             <SplideSlide key={index}>
               <Card
                 sx={{
-                  width: { xs: "115px", sm: "315px" },
-                  height: { xs: "155px", sm: "315px" },
-                  borderRadius: "20px",
-                  marginBottom: "20px",
+                  width: { xs: "160px", sm: "216px" },
+                  height: { xs: "130px", sm: "190px" },
+                  borderRadius: "16px",
+                  marginBottom: "10px",
+                  position: "relative",
                 }}
               >
                 <ButtonBase
@@ -70,8 +72,8 @@ const Articles = () => {
                   <CardActionArea>
                     <CardMedia
                       sx={{
-                        width: { xs: "115px", sm: "315px" },
-                        height: { xs: "100px", sm: "240px" },
+                        width: { xs: "160px", sm: "216px" },
+                        height: { xs: "100px", sm: "140px" },
                         borderRadius: "10px 10px 0 0",
                       }}
                       component="img"
@@ -80,15 +82,14 @@ const Articles = () => {
                     />
                     <CardContent
                       sx={{
-                        width: { xs: "115px", sm: "315px" },
+                        width: { xs: "160px", sm: "216px" },
                       }}
                     >
                       <Typography
                         gutterBottom
-                        fontWeight="bold"
                         textAlign="center"
                         component="div"
-                        sx={{ fontSize: { xs: "9px", sm: "15px" } }}
+                        sx={{ fontSize: { xs: "8px", sm: "12px" } }}
                       >
                         {image.title}
                       </Typography>
