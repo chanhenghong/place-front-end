@@ -2,7 +2,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import React, { useEffect, useState } from "react";
 import Notes from "../components/presentations/FilterCard";
-
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   places,
   activities,
@@ -12,9 +13,11 @@ import {
 } from "./../web-admin/_mock_/category";
 import {
   Button,
+  IconButton,
   TextField,
   Grid,
   Box,
+  Stack,
   Typography,
   Container,
 } from "@mui/material";
@@ -109,18 +112,43 @@ export default function FilterPage({ contents }) {
                     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                  */}
           <form className={classes.form} noValidate>
-            <Grid
-              container
-              spacing={2}
+            <Stack
               direction="row"
-              justifyContent="center"
+              justifyContent="space-between"
               alignItems="center"
+              spacing={2}
               sx={{
-                paddingLeft: { xs: "10px", sm: "30px", lg: "30px" },
-                paddingRight: { xs: "10px", sm: "30px", lg: "30px" },
+                paddingLeft: { xs: 1.5, sm: 3.7 },
+                paddingRight: { xs: 1.5, sm: 3.7 },
+                paddingTop: 3.7,
+                paddingBottom: 2,
               }}
             >
-              <Grid item xs={2.5} lg={1} sm={1.5}>
+              <Stack item sx={{ width: "100%" }}>
+                <TextField
+                  autoComplete="off"
+                  label="search place"
+                  onChange={(e) => handleSearch(e.target.value)}
+                  variant="outlined"
+                  sx={{
+                    width: "100%",
+                    [`& fieldset`]: {
+                      borderRadius: 4,
+                      borderColor: "rgb(170, 172, 171, 0.6)",
+                      boxShadow:
+                        "0px 0.5526161193847656px 2.2104644775390625px 0px rgba(0, 0, 0, 0.25)",
+                    },
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                ></TextField>
+              </Stack>
+              <Stack item xs={2.5} lg={1} sm={1.5}>
                 <Autocomplete
                   onChange={(event, value) =>
                     filterPrices(value.price.toLowerCase().replaceAll(" ", ""))
@@ -139,7 +167,7 @@ export default function FilterPage({ contents }) {
                         autoComplete: "new-password", // disable autocomplete and autofill
                       }}
                       sx={{
-                        width: "100%",
+                        width: 70,
                         [`& fieldset`]: {
                           borderRadius: 4,
                           borderColor: "rgb(170, 172, 171, 0.6)",
@@ -151,24 +179,19 @@ export default function FilterPage({ contents }) {
                   )}
                   getOptionLabel={(option) => option.price}
                 />
-              </Grid>
-              <Grid item xs={9.5} lg={11} sm={10.5}>
-                <TextField
-                  autoComplete="off"
-                  label="search place"
-                  onChange={(e) => handleSearch(e.target.value)}
-                  variant="outlined"
-                  sx={{
-                    width: "100%",
-                    [`& fieldset`]: {
-                      borderRadius: 4,
-                      borderColor: "rgb(170, 172, 171, 0.6)",
-                      boxShadow:
-                        "0px 0.5526161193847656px 2.2104644775390625px 0px rgba(0, 0, 0, 0.25)",
-                    },
-                  }}
-                ></TextField>
-              </Grid>
+              </Stack>
+            </Stack>
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              sx={{
+                paddingLeft: { xs: "10px", sm: "30px", lg: "30px" },
+                paddingRight: { xs: "10px", sm: "30px", lg: "30px" },
+              }}
+            >
               <Grid item xs={6} lg={3} sm={6}>
                 <Autocomplete
                   onChange={(event, value) =>
