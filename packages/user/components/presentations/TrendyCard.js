@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+import { Box, Stack } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -31,11 +31,10 @@ const images = [
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: "relative",
   height: 500,
-  marginLeft: 5,
   marginTop: 10,
   [theme.breakpoints.down("sm")]: {
-    width: "100% !important", // Overrides inline-style
-    height: 100,
+    // width: "100% !important", // Overrides inline-style
+    height: 280,
   },
   "&:hover, &.Mui-focusVisible": {
     zIndex: 1,
@@ -94,46 +93,48 @@ const ImageMarked = styled("span")(({ theme }) => ({
 
 export default function ButtonBases() {
   return (
-    <Box
-      sx={{
-        justifyContent: "center",
-        display: "flex",
-        flexWrap: "wrap",
-        minWidth: 300,
-        width: "100%",
-      }}
-    >
-      {images.map((image) => (
-        <ImageButton
-          focusRipple
-          key={image.title}
-          style={{
-            width: image.width,
-          }}
-        >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-          <ImageBackdrop className="MuiImageBackdrop-root" />
-          <Image>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              sx={{
-                position: "relative",
-                p: 2,
-                pt: 2,
-                pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-              }}
-            >
-              {image.title}
-              <ImageMarked className="MuiImageMarked-root" />
-            </Typography>
-            <ArrowRightAltIcon
-              style={{ marginLeft: 0, fontSize: 40, marginBottom: 9 }}
-            ></ArrowRightAltIcon>
-          </Image>
-        </ImageButton>
-      ))}
-    </Box>
+    <Stack direction="row">
+      <Box
+        sx={{
+          justifyContent: "center",
+          display: "flex",
+          flexWrap: "wrap",
+          minWidth: 300,
+          width: "100%",
+        }}
+      >
+        {images.map((image) => (
+          <ImageButton
+            focusRipple
+            key={image.title}
+            style={{
+              width: image.width,
+            }}
+          >
+            <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+            <ImageBackdrop className="MuiImageBackdrop-root" />
+            <Image>
+              <Typography
+                component="span"
+                color="inherit"
+                sx={{
+                  position: "relative",
+                  p: 2,
+                  pt: 2,
+                  fontSize: {xs:9, sm: 15},
+                  pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                }}
+              >
+                {image.title}
+                <ImageMarked className="MuiImageMarked-root" />
+              </Typography>
+              <ArrowRightAltIcon
+                sx={{ marginLeft: "0px", fontSize: {xs: 10,sm: 40}, marginBottom:{xs: "15px", sm:  "5px"} }}
+              ></ArrowRightAltIcon>
+            </Image>
+          </ImageButton>
+        ))}
+      </Box>
+    </Stack>
   );
 }
