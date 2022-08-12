@@ -90,14 +90,7 @@ export default function New() {
             display: "block",
           }}
         >
-          <Image
-            layout="fill"
-            src="/homepageKhmer.jpg"
-            alt="flag"
-            sx={{
-              position: "absolute",
-            }}
-          />
+          <Image layout="fill" src="/homepageKhmer.jpg" alt="flag" />
         </Box>
       </Box>
 
@@ -152,46 +145,46 @@ export default function New() {
         {/* </div> */}
 
         <div container className={classes.search}>
-          <Button
+          <Link
+            href="/filter_before_login"
             sx={{
-              zIndex: "none",
-              position: "none",
-              width: { xs: "70vw", md: "35vw" },
-              height: { xs: "35px", md: "45px" },
-              marginTop: "10px",
-              borderRadius: "16px",
-              backgroundColor: "#008058",
-              boxShadow: {
-                xs: "3px 5px 0px 0px #232323",
-                sm: "3px 6px 0 0px #999",
-              },
-              textTransform: { xs: "none", sm: "uppercase" },
-              // textSize: { xs: 18, md: "60px" },
-              textSizeAdjust: "80%",
-              "&:hover": {
-                backgroundColor: "#014731",
-              },
+              textDecoration: "none",
+              color: "white",
             }}
-            variant="contained"
-            endIcon={
-              <FilterListIcon
-                sx={{
-                  marginLeft: { xs: "20px", md: "140px" },
-                }}
-              />
-            }
           >
-            <Link
-              href="/filter_before_login"
+            <Button
               sx={{
-                textDecoration: "none",
-                color: "white",
+                zIndex: "none",
+                position: "none",
+                width: { xs: "70vw", md: "35vw" },
+                height: { xs: "35px", md: "45px" },
+                marginTop: "10px",
+                borderRadius: "16px",
+                backgroundColor: "#008058",
+                boxShadow: {
+                  xs: "3px 5px 0px 0px #232323",
+                  sm: "2px 2px 2px 2px #004630",
+                },
+                textTransform: { xs: "none", sm: "uppercase" },
+                // textSize: { xs: 18, md: "60px" },
+                textSizeAdjust: "80%",
+                "&:hover": {
+                  backgroundColor: "#014731",
+                },
               }}
+              variant="contained"
+              endIcon={
+                <FilterListIcon
+                  sx={{
+                    marginLeft: { xs: "20px", md: "140px" },
+                  }}
+                />
+              }
             >
               {" "}
               Filter your kind of place here{" "}
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
         <CardInHomepage />
       </div>

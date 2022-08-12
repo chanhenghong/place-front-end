@@ -70,6 +70,13 @@ const PlaceBasedOnRegion = () => {
                   borderRadius: "16px",
                   marginBottom: "10px",
                   position: "relative",
+                  boxShadow:"0px 0.7px 8px 0.7px #999",
+                  "&:hover": {
+                    boxShadow:"0px 0px 0px 0px" ,
+                    transition: ' transform .2s', /* Animation */
+                    transform: 'scale(0.96)',  
+                    },
+                 
                 }}
               >
                 <ButtonBase
@@ -82,10 +89,12 @@ const PlaceBasedOnRegion = () => {
                     )
                   }
                 >
-                  <CardActionArea>
+                  <CardActionArea
+                  >
                     <CardMedia
                       image={image.url}
                       sx={{
+                       
                         width: { xs: "160px", sm: "216px" },
                         height: { xs: "130px", sm: "190px" },
                       }}
@@ -94,6 +103,8 @@ const PlaceBasedOnRegion = () => {
                     />
                     <CardContent
                       sx={{
+                       
+                         
                         width: { xs: "160px", sm: "216px" },
                         height: { xs: "130px", sm: "190px" },
                         position: "absolute",

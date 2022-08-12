@@ -66,6 +66,12 @@ const TypeOfPlace = () => {
                   borderRadius: "16px",
                   marginBottom: "10px",
                   position: "relative",
+                  "&:hover": {
+                    boxShadow:"0px 0px 0px 0px" ,
+                    transition: ' transform .2s', /* Animation */
+                    transform: 'scale(0.96)',  
+                    },
+
                 }}
               >
                 <ButtonBase
