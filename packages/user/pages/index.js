@@ -59,7 +59,7 @@ export default function New() {
           }}
         >
           <Image
-            src="/homepageCoffee.jpg"
+            src="/homepageCoffee.jpeg"
             alt="coffee"
             layout="fill"
             sx={{
@@ -146,7 +146,7 @@ export default function New() {
 
         <div container className={classes.search}>
           <Link
-            href="/filter_before_login"
+            href="/filterPage"
             sx={{
               textDecoration: "none",
               color: "white",
@@ -162,8 +162,8 @@ export default function New() {
                 borderRadius: "16px",
                 backgroundColor: "#008058",
                 boxShadow: {
-                  xs: "3px 5px 0px 0px #232323",
-                  sm: "2px 2px 2px 2px #004630",
+                  xs: "3px 3px 0px 0px #1B6D54",
+                  sm: "3px 3px 0px 0px  #1B6D54",
                 },
                 textTransform: { xs: "none", sm: "uppercase" },
                 // textSize: { xs: 18, md: "60px" },
@@ -176,7 +176,7 @@ export default function New() {
               endIcon={
                 <FilterListIcon
                   sx={{
-                    marginLeft: { xs: "20px", md: "140px" },
+                    marginLeft: { xs: "20px", md: "100px" },
                   }}
                 />
               }

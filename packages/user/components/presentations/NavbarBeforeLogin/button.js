@@ -12,7 +12,8 @@ const Button = styled('div')(({theme})=>({
     borderRadius: "8px",
     transition: "0.3s all ease-out",
     cursor: "pointer",
-    boxShadow:"3px 4px 0px 0px #999",
+    boxShadow:"3px 3px 1px 0px #1B6D54" ,
+
 
     "&:hover": {
       color: "white",
@@ -22,7 +23,7 @@ const Button = styled('div')(({theme})=>({
     },
 
     [theme.breakpoints.down("sm")]: {
-      boxShadow:"3px 4px 0px 0px #232323" ,
+      boxShadow:"3px 3px 1px 0px #1B6D54" ,
       padding: "6px 13px",
 
     },

@@ -1,5 +1,6 @@
 import Autocomplete from "@mui/material/Autocomplete";
-
+import Link from "next/link";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Notes from "../components/presentations/FilterCard";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -22,6 +23,7 @@ import {
   Container,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import PrimarySearchAppBar from "../components/containers/NavBarAfterLogin";
 
 const useStyles = makeStyles({
   paper: {
@@ -101,11 +103,46 @@ export default function FilterPage({ contents }) {
   }, [filters]);
   return (
     <div>
+<PrimarySearchAppBar/>
+
+<Box
+        sx={{
+          width: "100%",
+          height: { xs: "50vh", sm: "90vh" },
+          position: "relative",
+          display: "block",
+        }}
+      >
+        <Image src="/map1.jpg" alt="LOGO" layout="fill"></Image>
+
+        <Stack justifyContent="center" display="flex" alignItems="center">
+          <Link href="./../map" passHref>
+            <Button
+              sx={{
+                zIndex: "1",
+                borderRadius: { xs: "8px", sm: "16px" },
+                backgroundColor: "white",
+                color: "Black",
+                boxShadow: "5px 7px #888888",
+                width: { xs: "40%", sm: "30%", md: "20%" },
+                position: "absolute",
+                marginRight: "auto",
+                marginTop: { xs: "80vh", sm: "110vh" },
+                "&:hover": {
+                  boxShadow: "0px 0px ",
+                },
+              }}
+            >
+              Explore on Map
+            </Button>
+          </Link>
+        </Stack>
+      </Box>
       <Container component="main" maxWidth="lg">
         {/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                                                           Header 
           - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/}
-
+        
         <div className={classes.paper}>
           {/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                                                          Search Bar

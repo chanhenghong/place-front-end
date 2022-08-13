@@ -71,7 +71,7 @@ const PrimarySearchAppBar = () => {
   const itemlist = [
     {
       text: "Filter",
-      path: "./../../place",
+      path: "./../../filterPage",
     },
     {
       text: "Article & Video",
@@ -243,7 +243,7 @@ const PrimarySearchAppBar = () => {
                 // onMouseLeave={() => setDropdown(false)}
               >
                 
-                <Link href="./../../place">Filter</Link>
+                <Link href="./../../filterPage">Filter</Link>
                 {/* {dropdown && <ActivityDropdown />} */}
               </li>
 

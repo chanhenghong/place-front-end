@@ -37,59 +37,68 @@ const Articles = () => {
         <b>Articles</b>
       </Typography>
       <Splide
-        options={{
-          perPage: 5,
-          breakpoints: {
-            1430: {
-              perPage: 4,
-            },
-            1090: {
-              perPage: 3,
-            },
-            780: {
-              perPage: 2,
-            },
+       options={{
+        perPage: 4,
+        breakpoints: {
+          1430: {
+            perPage: 3,
           },
-          pagination: false,
-          drag: "free",
-        }}
+          1090: {
+            perPage: 2,
+          },
+          780: {
+            perPage: 1,
+          },
+        },
+        pagination: false,
+        drag: "free",
+      }}
+       
       >
         {articles.map((image, index) => {
           return (
             <SplideSlide key={index}>
               <Card
                 sx={{
-                  width: { xs: "160px", sm: "216px" },
-                  height: { xs: "130px", sm: "190px" },
-                  borderRadius: "16px",
-                  marginBottom: "10px",
-                  position: "relative",
+                  width:{xs:"285px",sm:"335px"} ,
+                  height:{xs:"255px",sm:"300px"} ,
+                  borderRadius: "20px",
+                  marginBottom: "20px",
+                  boxShadow:"0px 0.7px 8px 0.7px #999",
+                  "&:hover": {
+                    boxShadow:"0px 0px 0px 0px" ,
+                    transition: ' transform .2s', /* Animation */
+                    transform: 'scale(0.96)',  
+                    },
+                
                 }}
               >
                 <ButtonBase
-                  onClick={() => router.push("/articlepage/" + `${image.id}`)}
+                  onClick={() =>
+                    router.push("/articlepage/" + `${image.title}`)
+                  }
                 >
                   <CardActionArea>
                     <CardMedia
                       sx={{
-                        width: { xs: "160px", sm: "216px" },
-                        height: { xs: "100px", sm: "140px" },
+                        // width:{xs:"235px",md:"335px"} ,
+                        // height: "205px",
+                        width:{xs:"285px",sm:"335px"} ,
+                  height:{xs:"175px",sm:"205px"} ,
                         borderRadius: "10px 10px 0 0",
                       }}
                       component="img"
                       alt="green iguana"
                       image={image.url}
                     />
-                    <CardContent
-                      sx={{
-                        width: { xs: "160px", sm: "216px" },
-                      }}
-                    >
+                    <CardContent sx={{ height: "205px" }}>
                       <Typography
                         gutterBottom
+                        variant="h5"
+                        fontSize="20px"
+                        fontWeight="bold"
                         textAlign="center"
                         component="div"
-                        sx={{ fontSize: { xs: "8px", sm: "12px" } }}
                       >
                         {image.title}
                       </Typography>

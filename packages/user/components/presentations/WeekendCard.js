@@ -14,6 +14,11 @@ const WeekendCard = () => {
                 position: "relative",
                 textAlign: "center",
                 borderRadius:3,
+                "&:hover": {
+                  boxShadow:"0px 0px 0px 0px" ,
+                  transition: ' transform .2s', /* Animation */
+                  transform: 'scale(0.96)',  
+                  },
               }}
             >
               <CardMedia
@@ -59,6 +64,11 @@ const WeekendCard = () => {
                 position: "relative",
                 textAlign: "center",
                 borderRadius:3,
+                "&:hover": {
+                  boxShadow:"0px 0px 0px 0px" ,
+                  transition: ' transform .2s', /* Animation */
+                  transform: 'scale(0.96)',  
+                  },
               }}
             >
               <CardMedia

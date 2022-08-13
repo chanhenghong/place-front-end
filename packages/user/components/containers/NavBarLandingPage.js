@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import Link from "next/link";
 import Typography from "@material-ui/core/Typography";
@@ -8,15 +10,16 @@ import { AppBar, Box } from "@mui/material";
 
 const useStyle = makeStyles({
   navbar: {
-    height: "10vh",
-    background: "white",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
     position: "sticky",
     top: 0,
     zIndex: 2,
+height: "90px",
+    background: "white",
+    borderBottom: "1px solid rgb(235, 234, 233)",
+    display: "flex",
+    flexDirection: "row", //add
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   navbarLogo: {
@@ -62,7 +65,7 @@ export default function NavBarLandingPage() {
   const classes = useStyle();
   return (
     <>
-      <AppBar className={classes.navbar}>
+      <nav className={classes.navbar}>
         <Link href="/" passHref>
           <Image
             src="/LogoProject.svg"
@@ -108,7 +111,7 @@ export default function NavBarLandingPage() {
         <Box sx={{ marginLeft: { xs: "48vw", sm: "0px" } }}>
           <ButtonNavbar />
         </Box>
-      </AppBar>
+      </nav>
     </>
   );
 }
